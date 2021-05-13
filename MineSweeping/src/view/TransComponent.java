@@ -7,6 +7,7 @@ import java.awt.*;
 public class TransComponent extends JPanel{
         
     public JButton music;
+    public JButton rets;
 
     public JButton ret;
     public JButton one;
@@ -38,6 +39,14 @@ public class TransComponent extends JPanel{
         music.setBounds(758,725,50,50);
         music.setBorderPainted(false);
         add(music);
+
+        Image reticon = new ImageIcon("src\\view\\pictures\\returnicon.jpg").getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT);
+        ImageIcon returnicon = new ImageIcon(reticon);
+        rets = new JButton(returnicon);
+        rets.setBounds(0,0,50,50);
+        rets.setBorderPainted(false);
+        add(rets);
+
 
         ret = new JButton("返回");
         one = new JButton("单人游戏");

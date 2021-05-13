@@ -3,21 +3,21 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
-public class HelpComponent extends JPanel{
+public class StoryComponent extends JPanel {
 
     public JButton music;
     public JButton rets;
 
     @Override
 
-    public void paintComponent(Graphics g) {
-        ImageIcon background=new ImageIcon("");
+        public void paintComponent(Graphics g) {
+            ImageIcon background=new ImageIcon("");
 
-        g.drawImage(background.getImage(), 0, 0, getWidth(), getHeight(), null);
+            g.drawImage(background.getImage(), 0, 0, getWidth(), getHeight(), null);
 
-    }
+        }
 
-    public HelpComponent(){
+    public StoryComponent(){
         setSize(818,805);
         setLayout(null);
 
@@ -36,4 +36,5 @@ public class HelpComponent extends JPanel{
         add(rets);
     }
     
+
 }
