@@ -26,9 +26,7 @@ public class GameFrame extends JFrame{
     public void setContentPane(MtransComponent mtrans) {
         getRootPane().setContentPane(mtrans);
     }
-    public void setContentPane(DItransComponent ditrans) {
-        getRootPane().setContentPane(ditrans);
-    }
+    
 
     public GameFrame() {
         Image icon = new ImageIcon("src\\view\\pictures\\Icon.gif").getImage();
@@ -49,7 +47,7 @@ public class GameFrame extends JFrame{
         StransComponent strans = new StransComponent();
         DtransComponent dtrans = new DtransComponent();
         MtransComponent mtrans = new MtransComponent();
-        DItransComponent ditrans = new DItransComponent();
+        
 
         start.start.addActionListener(new ActionListener() {
             @Override
@@ -71,18 +69,36 @@ public class GameFrame extends JFrame{
         });
 
         
-        trans.ret.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setContentPane(start);
-            }
-        });
+        
         trans.rets.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setContentPane(start);
             }
         });
+
+        trans.one.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setContentPane(strans);
+            }
+        });
+
+        trans.two.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setContentPane(dtrans);
+            }
+        });
+
+        trans.many.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setContentPane(mtrans);
+            }
+        });
+
+        
 
         help.rets.addActionListener(new ActionListener() {
             @Override
@@ -97,6 +113,30 @@ public class GameFrame extends JFrame{
                 setContentPane(start);
             }
         });
+
+        strans.rets.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setContentPane(trans);
+            }
+        });
+
+        dtrans.rets.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setContentPane(trans);
+            }
+        });
+
+        mtrans.rets.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setContentPane(trans);
+            }
+        });
+
+        
+
 
         
 
