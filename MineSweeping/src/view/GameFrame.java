@@ -17,13 +17,18 @@ public class GameFrame extends JFrame{
     public void setContentPane(HelpComponent help) {
         getRootPane().setContentPane(help);
     }
-    public void setContentPane(StoryComponent story) {
-        getRootPane().setContentPane(story);
+    public void setContentPane(StransComponent strans) {
+        getRootPane().setContentPane(strans);
     }
-
-
-    
-
+    public void setContentPane(DtransComponent dtrans) {
+        getRootPane().setContentPane(dtrans);
+    }
+    public void setContentPane(MtransComponent mtrans) {
+        getRootPane().setContentPane(mtrans);
+    }
+    public void setContentPane(DItransComponent ditrans) {
+        getRootPane().setContentPane(ditrans);
+    }
 
     public GameFrame() {
         Image icon = new ImageIcon("src\\view\\pictures\\Icon.gif").getImage();
@@ -41,6 +46,10 @@ public class GameFrame extends JFrame{
         TransComponent trans = new TransComponent();
         StoryComponent story = new StoryComponent();
         HelpComponent help = new HelpComponent();
+        StransComponent strans = new StransComponent();
+        DtransComponent dtrans = new DtransComponent();
+        MtransComponent mtrans = new MtransComponent();
+        DItransComponent ditrans = new DItransComponent();
 
         start.start.addActionListener(new ActionListener() {
             @Override
@@ -89,6 +98,7 @@ public class GameFrame extends JFrame{
             }
         });
 
+        
 
         setContentPane(start);
         
