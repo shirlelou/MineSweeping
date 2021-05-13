@@ -19,7 +19,7 @@ public class StartComponent extends JPanel{
     @Override
 
         public void paintComponent(Graphics g) {
-            ImageIcon background=new ImageIcon("");
+            ImageIcon background=new ImageIcon("src\\view\\pictures\\background.gif");
 
             g.drawImage(background.getImage(), 0, 0, getWidth(), getHeight(), null);
 
@@ -41,6 +41,15 @@ public class StartComponent extends JPanel{
         help.setBounds(230,550,350,50);
         story.setBounds(230,450,350,50);
         music.setBounds(758,725,50,50);
+
+        
+        start.setContentAreaFilled(false);
+        help.setContentAreaFilled(false);
+        story.setContentAreaFilled(false);
+
+        start.setForeground(Color.yellow);
+        help.setForeground(Color.yellow);
+        story.setForeground(Color.yellow);
 
 
         music.setBorderPainted(false);
