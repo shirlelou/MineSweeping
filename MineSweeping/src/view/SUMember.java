@@ -24,7 +24,7 @@ public class SUMember {
         return scoreBoard;
     }
 
-    public void SmemData() {
+    public void SUMemData() {
         memberData = "玩家"+(orderNum+1)+"得分数:"+score+"失误数:"+miss;
         scoreBoard.setText(memberData);
     }
