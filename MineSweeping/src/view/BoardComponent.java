@@ -11,6 +11,7 @@ public class BoardComponent extends Panel {
     private int rows;
     private int cols;
     private int bombCount;
+    private SUMember suMember;
     public BoardComponent(int rows, int cols, int bombCount) {
         super(rows, cols, bombCount);
     }
@@ -33,8 +34,7 @@ public class BoardComponent extends Panel {
 
                         }
                     }
-
-                })
+                });
             }
         }
     }
