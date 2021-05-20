@@ -34,6 +34,18 @@ public class HelpComponent extends JPanel{
         rets.setBounds(0,0,50,50);
         rets.setBorderPainted(false);
         add(rets);
+
+
+        JLabel storyText = new JLabel();
+        storyText.setBounds(100,100,600,600);
+        Font font = new Font("黑体",Font.BOLD,12);
+        storyText.setFont(font);
+        String text0 = "";
+        String text1 = "";
+        String text2 = "";
+        String text3 = "";
+        storyText.setText(text0+text1+text2+text3);
+        add(storyText);
     }
     
 }
