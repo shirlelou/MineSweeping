@@ -10,6 +10,7 @@ public class Panel extends JPanel{
     private final int BlockWidth = 25;
     private final int BlockHeight = 25;
     private JLabel[][] labels;
+    private boolean[][] flag = new boolean[rows][cols];
 
     public Panel(int rows, int cols, int bombCount) {
         this.rows = rows;
