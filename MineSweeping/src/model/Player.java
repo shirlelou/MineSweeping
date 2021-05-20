@@ -5,6 +5,12 @@ public class Player {
     private int orderNum;
     private int miss;
     private int score;
+
+
+
+    public int getScore() {
+        return score;
+    }
     
     public Player(int orderNum,boolean ishuman){
         this.orderNum=orderNum;

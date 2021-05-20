@@ -13,6 +13,7 @@ public class Board {
     int move;
     boolean hadinit;
     int remain;
+    boolean isend;
     
     Player[] players;
 
@@ -29,6 +30,7 @@ public class Board {
         playerNow=1;
         move=0;
         remain=mineNum;
+        isend=false;
     }
 
 
@@ -231,6 +233,21 @@ public class Board {
         move=0;
     }
 
+
+    private boolean checkScore(){
+        int maxScore=0;
+        int over=0;
+        for(int i=1;i<=playerNum;i++){
+            if(maxScore<players[i].getScore())maxScore=players[i].getScore();
+        }
+        for(int i=1;i<=playerNum;i++){
+            if(maxScore-players[i].getScore()>=remain)over++;
+        }
+        if(over==playerNum-1)return true;
+        return false;
+        //如果有玩家胜利就返回true
+    }
+
     private boolean isEnd(){
 /*
         获胜条件：每进行一回合均需要比较双方的分数。
@@ -240,26 +257,47 @@ public class Board {
         c. 如果失误数依然相同，则双方平局。
 */
 
+        if(playerNum==1){
+            if(remain==0)return true;
+            else return false;
+        }
+
 
         if(remain==0)return true;
+        if(checkScore())return true;
+        return false;
     }
 
     public void operate(int x,int y,boolean left,boolean[][] ret){
-        if(getMineState(x, y)==0&&left)voidOpen(x, y, ret);
-        if(getMineState(x, y)==0&&!left)voidMark(x, y, ret);
-        if(getMineState(x, y)==9&&left)mineOpen(x, y, ret);
-        if(getMineState(x, y)==9&&!left)mineMark(x, y, ret);
-        if(getMineState(x, y)>=1&&getMineState(x, y)<=8&&left)numOpen(x, y, ret);
-        if(getMineState(x, y)>=1&&getMineState(x, y)<=8&&!left)numMark(x, y, ret);
 
-        move++;
-        if(move==moveNum)changePlayer();
-        
-        //检测是否结束游戏
+        if(hadinit){
+                
+            if(getMineState(x, y)==0&&left)voidOpen(x, y, ret);
+            if(getMineState(x, y)==0&&!left)voidMark(x, y, ret);
+            if(getMineState(x, y)==9&&left)mineOpen(x, y, ret);
+            if(getMineState(x, y)==9&&!left)mineMark(x, y, ret);
+            if(getMineState(x, y)>=1&&getMineState(x, y)<=8&&left)numOpen(x, y, ret);
+            if(getMineState(x, y)>=1&&getMineState(x, y)<=8&&!left)numMark(x, y, ret);
 
-        if(isEnd()){
+            move++;
+            if(move==moveNum)changePlayer();
+            
+            //检测是否结束游戏
+
+            if(isEnd()){
+                isend=true;
+
+                //TODO:文档删除
+
+            }
 
         }
+        else{
+
+            boardInit(x, y);
+            hadinit=true;
+        }
+
 
         //TODO:存档，文件写入
 
