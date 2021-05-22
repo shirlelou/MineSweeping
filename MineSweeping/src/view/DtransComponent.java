@@ -28,7 +28,7 @@ public class DtransComponent extends JPanel{
 
     public DtransComponent(){
 
-        setSize(818,805);
+        setSize(990,805);
 
         Image icon = new ImageIcon("src\\view\\pictures\\musicicon.gif").getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT);
         ImageIcon musicicon = new ImageIcon(icon);

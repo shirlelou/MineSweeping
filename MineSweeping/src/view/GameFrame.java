@@ -33,7 +33,7 @@ public class GameFrame extends JFrame{
         setTitle("扫雷游戏");
         setIconImage(icon);
         
-        setSize(818, 815);
+        setSize(1000, 815);
         
         setLocationRelativeTo(null); // Center the window.
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -47,7 +47,7 @@ public class GameFrame extends JFrame{
         StransComponent strans = new StransComponent();
         DtransComponent dtrans = new DtransComponent();
         MtransComponent mtrans = new MtransComponent();
-        BoardComponent boardcom = new BoardComponent(9,9,1,0,10,5);;
+        BoardComponent boardcom = new BoardComponent(24,30,1,0,99,5);;
         
 
         start.start.addActionListener(new ActionListener() {

@@ -18,7 +18,7 @@ public class StoryComponent extends JPanel {
         }
 
     public StoryComponent(){
-        setSize(818,805);
+        setSize(990,805);
         setLayout(null);
 
         Image icon = new ImageIcon("src\\view\\pictures\\musicicon.gif").getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT);

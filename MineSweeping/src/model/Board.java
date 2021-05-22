@@ -1,5 +1,6 @@
 package model;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -31,18 +32,24 @@ public class Board {
         this.mineNum=mineNum;
         hadinit=false;
         gridInfo=new int[row+3][col+3];
-        players = new Player[aiNum+playerNum];
+        players = new Player[aiNum+playerNum+1];
         playerNow=1;
         move=0;
         remain=mineNum;
         isend=false;
+
+        for(int i=1;i<=aiNum+playerNum;i++){
+            if(i<=playerNum)players[i]=new Player(i, true);
+            if(i>playerNum)players[i]=new Player(i, false);
+        }
+
     }
 
     public Board(){
-        FileInputStream document = null;
+      /*  FileInputStream document = null;
         //继续游戏 读取存档
         try {
-            document = new FileInputStream("");
+            
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }finally{
@@ -54,7 +61,7 @@ public class Board {
                 }
             }
         }
-       
+       */
     }
 
 
@@ -137,6 +144,11 @@ public class Board {
 
 
     private void boardInit(int x0,int y0){
+
+        {
+            System.out.println("fuck");
+        }
+
         Random r=new Random();
         int mines=0;
         gridInfo[x0][y0]=1;
@@ -203,7 +215,7 @@ public class Board {
 
     private void open(int x,int y,boolean[][] ret){
         
-        if(getMineState(x, y)==0){
+        if(getMineState(x, y)==0&&getOpenState(x, y)==1){
             ret[x][y]=true;
             gridInfo[x][y]=3;
             if(getMineState(x-1,y-1)!=9&&getOpenState(x-1, y-1)==1)open(x-1,y-1,ret);
@@ -214,12 +226,19 @@ public class Board {
             if(getMineState(x+1,y-1)!=9&&getOpenState(x+1, y+1)==1)open(x+1,y-1,ret);
             if(getMineState(x+1,y)!=9&&getOpenState(x+1, y)==1)open(x+1,y,ret);
             if(getMineState(x+1,y+1)!=9&&getOpenState(x+1, y+1)==1)open(x+1,y+1,ret);
-        }
-        else if(getOpenState(x, y)==1){
             ret[x][y]=true;
             gridInfo[x][y]=getMineState(x, y)*10+3;
         }
+        else if(getMineState(x, y)!=9&&getOpenState(x, y)==1){
+            ret[x][y]=true;
+            gridInfo[x][y]=getMineState(x, y)*10+3;
+        }
+        
     }
+
+
+
+
 
     public void voidOpen(int x,int y,boolean[][] ret){
         open(x, y, ret);
@@ -253,7 +272,7 @@ public class Board {
 
     private void changePlayer(){
         if(playerNow<playerNum)playerNow++;
-        else playerNow=0;
+        else playerNow=1;
         move=0;
     }
 
@@ -294,39 +313,42 @@ public class Board {
 
     public void operate(int x,int y,boolean left,boolean[][] ret){
 
-        if(hadinit){
-                
-            if(getMineState(x, y)==0&&left)voidOpen(x, y, ret);
-            if(getMineState(x, y)==0&&!left)voidMark(x, y, ret);
-            if(getMineState(x, y)==9&&left)mineOpen(x, y, ret);
-            if(getMineState(x, y)==9&&!left)mineMark(x, y, ret);
-            if(getMineState(x, y)>=1&&getMineState(x, y)<=8&&left)numOpen(x, y, ret);
-            if(getMineState(x, y)>=1&&getMineState(x, y)<=8&&!left)numMark(x, y, ret);
-
-            move++;
-            if(move==moveNum)changePlayer();
-            
-            //检测是否结束游戏
-
-            if(isEnd()){
-                isend=true;
-
-                //TODO:文档删除
-
-            }
-
-        }
-        else{
+        if(!hadinit){
 
             boardInit(x, y);
+            
             hadinit=true;
         }
 
+                
+        if(getMineState(x, y)==0&&left)voidOpen(x, y, ret);
+        if(getMineState(x, y)==0&&!left)voidMark(x, y, ret);
+        if(getMineState(x, y)==9&&left)mineOpen(x, y, ret);
+        if(getMineState(x, y)==9&&!left)mineMark(x, y, ret);
+        if(getMineState(x, y)>=1&&getMineState(x, y)<=8&&left)numOpen(x, y, ret);
+        if(getMineState(x, y)>=1&&getMineState(x, y)<=8&&!left)numMark(x, y, ret);
 
-        //TODO:存档，文件写入
+        move++;
+        if(move==moveNum)changePlayer();
+        
+        //检测是否结束游戏
+
+        if(isEnd()){
+            isend=true;  
+            File out = new File("out.txt");  
+            // 路径为文件且不为空则进行删除  
+            if (out.isFile() && out.exists()) {  
+                out.delete();    
+            }    
+            
+
+        }
+        
+
+
         FileWriter out = null;
         try {
-            out = new FileWriter("out");
+            out = new FileWriter("out.txt");
             out.write(playerNum+" "+aiNum+" "+moveNum+"\n");
             out.write(row+" "+col+" "+mineNum+"\n");
             out.write(playerNow+" "+move+" "+remain+"\n");
