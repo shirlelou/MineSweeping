@@ -1,12 +1,9 @@
 package model;
 
-<<<<<<< HEAD
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-=======
->>>>>>> 4ba9d48f2e553a3568318baecd3b07ccf7112dc6
 import java.util.Random;
 
 public class Board {
@@ -41,7 +38,6 @@ public class Board {
         isend=false;
     }
 
-<<<<<<< HEAD
     public Board(){
         FileInputStream document = null;
         //继续游戏 读取存档
@@ -61,8 +57,6 @@ public class Board {
        
     }
 
-=======
->>>>>>> 4ba9d48f2e553a3568318baecd3b07ccf7112dc6
 
     public int getMineState(int x,int y){
         return gridInfo[x][y]/10;
