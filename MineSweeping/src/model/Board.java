@@ -1,5 +1,6 @@
 package model;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -39,10 +40,10 @@ public class Board {
     }
 
     public Board(){
-        FileInputStream document = null;
+      /*  FileInputStream document = null;
         //继续游戏 读取存档
         try {
-            document = new FileInputStream("");
+            
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }finally{
@@ -54,7 +55,7 @@ public class Board {
                 }
             }
         }
-       
+       */
     }
 
 
@@ -294,36 +295,39 @@ public class Board {
 
     public void operate(int x,int y,boolean left,boolean[][] ret){
 
-        if(hadinit){
-                
-            if(getMineState(x, y)==0&&left)voidOpen(x, y, ret);
-            if(getMineState(x, y)==0&&!left)voidMark(x, y, ret);
-            if(getMineState(x, y)==9&&left)mineOpen(x, y, ret);
-            if(getMineState(x, y)==9&&!left)mineMark(x, y, ret);
-            if(getMineState(x, y)>=1&&getMineState(x, y)<=8&&left)numOpen(x, y, ret);
-            if(getMineState(x, y)>=1&&getMineState(x, y)<=8&&!left)numMark(x, y, ret);
-
-            move++;
-            if(move==moveNum)changePlayer();
-            
-            //检测是否结束游戏
-
-            if(isEnd()){
-                isend=true;
-
-                //TODO:文档删除
-
-            }
-
-        }
-        else{
+        if(!hadinit){
 
             boardInit(x, y);
+            
             hadinit=true;
         }
 
+                
+        if(getMineState(x, y)==0&&left)voidOpen(x, y, ret);
+        if(getMineState(x, y)==0&&!left)voidMark(x, y, ret);
+        if(getMineState(x, y)==9&&left)mineOpen(x, y, ret);
+        if(getMineState(x, y)==9&&!left)mineMark(x, y, ret);
+        if(getMineState(x, y)>=1&&getMineState(x, y)<=8&&left)numOpen(x, y, ret);
+        if(getMineState(x, y)>=1&&getMineState(x, y)<=8&&!left)numMark(x, y, ret);
 
-        //TODO:存档，文件写入
+        move++;
+        if(move==moveNum)changePlayer();
+        
+        //检测是否结束游戏
+
+        if(isEnd()){
+            isend=true;  
+            File out = new File("out.txt");  
+            // 路径为文件且不为空则进行删除  
+            if (out.isFile() && out.exists()) {  
+                out.delete();    
+            }    
+            
+
+        }
+        
+
+
         FileWriter out = null;
         try {
             out = new FileWriter("out");
