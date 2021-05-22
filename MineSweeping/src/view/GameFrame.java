@@ -47,7 +47,7 @@ public class GameFrame extends JFrame{
         StransComponent strans = new StransComponent();
         DtransComponent dtrans = new DtransComponent();
         MtransComponent mtrans = new MtransComponent();
-        BoardComponent boardcom = new BoardComponent(9,9,1,0,10,5);;
+        BoardComponent boardcom = new BoardComponent(24,30,1,0,99,5);;
         
 
         start.start.addActionListener(new ActionListener() {
