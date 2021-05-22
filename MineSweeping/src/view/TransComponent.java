@@ -21,7 +21,7 @@ public class TransComponent extends JPanel{
     @Override
 
         public void paintComponent(Graphics g) {
-            ImageIcon background=new ImageIcon("src\\view\\pictures\\background.gif");
+            ImageIcon background=new ImageIcon("");
 
             g.drawImage(background.getImage(), 0, 0, getWidth(), getHeight(), null);
 

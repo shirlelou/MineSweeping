@@ -47,6 +47,7 @@ public class GameFrame extends JFrame{
         StransComponent strans = new StransComponent();
         DtransComponent dtrans = new DtransComponent();
         MtransComponent mtrans = new MtransComponent();
+        BoardComponent boardcom = new BoardComponent(9,9,1,0,10,5);;
         
 
         start.start.addActionListener(new ActionListener() {
@@ -118,6 +119,13 @@ public class GameFrame extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 setContentPane(trans);
+            }
+        });
+        strans.primary.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                setContentPane(boardcom);
             }
         });
 
