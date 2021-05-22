@@ -1,6 +1,11 @@
 package model;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
+
 public class Board {
     int row;
     int col;
@@ -31,6 +36,25 @@ public class Board {
         move=0;
         remain=mineNum;
         isend=false;
+    }
+
+    public Board(){
+        FileInputStream document = null;
+        //继续游戏 读取存档
+        try {
+            document = new FileInputStream("");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }finally{
+            if(document != null){
+                try {
+                    document.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+       
     }
 
 
@@ -300,6 +324,27 @@ public class Board {
 
 
         //TODO:存档，文件写入
+        FileWriter out = null;
+        try {
+            out = new FileWriter("out");
+            out.write(playerNum+" "+aiNum+" "+moveNum+"\n");
+            out.write(row+" "+col+" "+mineNum+"\n");
+            out.write(playerNow+" "+move+" "+remain+"\n");
+            for(int i=1;i<=row;i++){
+                for(int j=1;j<=col;j++){
+                    out.write(gridInfo[i][j]+" ");
+                }
+                out.write("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally{
+            try {
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
