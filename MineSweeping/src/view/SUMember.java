@@ -29,12 +29,12 @@ public class SUMember extends JPanel{
 
     public void getScoreBoard(){
         scoreBoard.setBounds(0,160,160,30);
-        Font font = new Font("黑体",Font.BOLD,12);
+        Font font = new Font("黑体",Font.BOLD,11);
         scoreBoard.setFont(font);
     }
 
     public void SUMemData() {
-        memberData = "玩家"+(orderNum)+"得分数:"+score+"失误数:"+miss;
+        memberData = getName(orderNum)+" 得分数:"+score+"失误数:"+miss;
         scoreBoard.setText(memberData);
         add(scoreBoard);
     }
@@ -46,17 +46,33 @@ public class SUMember extends JPanel{
             ImageIcon picture = new ImageIcon(Picture);
             memberImage.setIcon(picture);
         }else if (orderNum==2){
-            Image Picture = new ImageIcon("src\\view\\individuation\\member02.jpg").getImage().getScaledInstance(160, 160, Image.SCALE_DEFAULT);
+            Image Picture = new ImageIcon("src\\view\\individuation\\member02Dark.jpg").getImage().getScaledInstance(160, 160, Image.SCALE_DEFAULT);
             ImageIcon picture = new ImageIcon(Picture);
             memberImage.setIcon(picture);
         }else if (orderNum==3){
-            Image Picture = new ImageIcon("src\\view\\individuation\\member03.jpg").getImage().getScaledInstance(160, 160, Image.SCALE_DEFAULT);
+            Image Picture = new ImageIcon("src\\view\\individuation\\member03Dark.jpg").getImage().getScaledInstance(160, 160, Image.SCALE_DEFAULT);
             ImageIcon picture = new ImageIcon(Picture);
             memberImage.setIcon(picture);
         }else if (orderNum==4){
-            Image Picture = new ImageIcon("src\\view\\individuation\\member04.jpg").getImage().getScaledInstance(160, 160, Image.SCALE_DEFAULT);
+            Image Picture = new ImageIcon("src\\view\\individuation\\member04Dark.jpg").getImage().getScaledInstance(160, 160, Image.SCALE_DEFAULT);
             ImageIcon picture = new ImageIcon(Picture);
             memberImage.setIcon(picture);
+        }
+    }
+
+    public void setMemberImage(ImageIcon picture) {
+        memberImage.setIcon(picture);
+    }
+
+    public String getName(int k){
+        if(k==1){
+            return "白银御行";
+        }else if(k==2){
+            return "四宫辉夜";
+        }else if(k==3){
+            return "藤原千花";
+        }else{
+            return "石上优 ";
         }
     }
 }
