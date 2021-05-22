@@ -39,7 +39,7 @@ public class BoardComponent extends JPanel {
         add(rets);
 
 
-        setSize(818,805);
+        setSize(990,805);
         rows = row;
         cols = col;
         bombCount = mineNum;

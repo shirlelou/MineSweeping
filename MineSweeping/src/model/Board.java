@@ -43,6 +43,7 @@ public class Board {
             if(i>playerNum)players[i]=new Player(i, false);
         }
 
+        
     }
 
     public Board(){
@@ -145,13 +146,9 @@ public class Board {
 
     private void boardInit(int x0,int y0){
 
-        {
-            System.out.println("fuck");
-        }
 
         Random r=new Random();
         int mines=0;
-        gridInfo[x0][y0]=1;
         while(mines<mineNum){
             int x=r.nextInt(row)+1;
             int y=r.nextInt(col)+1;
@@ -223,7 +220,7 @@ public class Board {
             if(getMineState(x-1,y+1)!=9&&getOpenState(x-1, y+1)==1)open(x-1,y+1,ret);
             if(getMineState(x,y-1)!=9&&getOpenState(x, y-1)==1)open(x,y-1,ret);
             if(getMineState(x,y+1)!=9&&getOpenState(x, y+1)==1)open(x,y+1,ret);
-            if(getMineState(x+1,y-1)!=9&&getOpenState(x+1, y+1)==1)open(x+1,y-1,ret);
+            if(getMineState(x+1,y-1)!=9&&getOpenState(x+1, y-1)==1)open(x+1,y-1,ret);
             if(getMineState(x+1,y)!=9&&getOpenState(x+1, y)==1)open(x+1,y,ret);
             if(getMineState(x+1,y+1)!=9&&getOpenState(x+1, y+1)==1)open(x+1,y+1,ret);
             ret[x][y]=true;
@@ -235,10 +232,6 @@ public class Board {
         }
         
     }
-
-
-
-
 
     public void voidOpen(int x,int y,boolean[][] ret){
         open(x, y, ret);
@@ -314,20 +307,16 @@ public class Board {
     public void operate(int x,int y,boolean left,boolean[][] ret){
 
         if(!hadinit){
-
             boardInit(x, y);
-            
             hadinit=true;
         }
 
-                
         if(getMineState(x, y)==0&&left)voidOpen(x, y, ret);
         if(getMineState(x, y)==0&&!left)voidMark(x, y, ret);
         if(getMineState(x, y)==9&&left)mineOpen(x, y, ret);
         if(getMineState(x, y)==9&&!left)mineMark(x, y, ret);
         if(getMineState(x, y)>=1&&getMineState(x, y)<=8&&left)numOpen(x, y, ret);
         if(getMineState(x, y)>=1&&getMineState(x, y)<=8&&!left)numMark(x, y, ret);
-
         move++;
         if(move==moveNum)changePlayer();
         
@@ -340,8 +329,6 @@ public class Board {
             if (out.isFile() && out.exists()) {  
                 out.delete();    
             }    
-            
-
         }
         
 
