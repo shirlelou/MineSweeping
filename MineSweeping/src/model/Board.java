@@ -77,6 +77,15 @@ public class Board {
         gridInfo[x][y]=gridInfo[x][y]/10*10+i;
         //1:关闭；2:标记；3:打开
     }
+    public int getRemain() {
+        return remain;
+    }
+    public int getMove() {
+        return move;
+    }
+    public int getPlayerNow() {
+        return playerNow;
+    }
 
     
     private boolean check1(int x,int y){
@@ -144,7 +153,7 @@ public class Board {
     }
 
 
-    private void boardInit(int x0,int y0){
+    public void boardInit(int x0,int y0){
 
 
         Random r=new Random();
@@ -185,7 +194,7 @@ public class Board {
                 mines++;
                 continue;
             }
-            if(check1(1, y)||check2(x, y)||check3(x, y)
+            if(check1(x, y)||check2(x, y)||check3(x, y)
             ||check4(x, y)||check5(x, y)||check6(x, y)
             ||check7(x, y)||check8(x, y)||check9(x, y))continue;
 

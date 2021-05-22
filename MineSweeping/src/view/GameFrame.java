@@ -5,28 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GameFrame extends JFrame{
-
-    
-    public void setContentPane(StartComponent start) {
-        getRootPane().setContentPane(start);
-    }
-    public void setContentPane(TransComponent trans) {
-        getRootPane().setContentPane(trans);
-    }
-    public void setContentPane(HelpComponent help) {
-        getRootPane().setContentPane(help);
-    }
-    public void setContentPane(StransComponent strans) {
-        getRootPane().setContentPane(strans);
-    }
-    public void setContentPane(DtransComponent dtrans) {
-        getRootPane().setContentPane(dtrans);
-    }
-    public void setContentPane(MtransComponent mtrans) {
-        getRootPane().setContentPane(mtrans);
-    }
-    
+public class GameFrame extends JFrame{ 
 
     public GameFrame() {
         Image icon = new ImageIcon("src\\view\\pictures\\Icon.gif").getImage();
@@ -47,7 +26,7 @@ public class GameFrame extends JFrame{
         StransComponent strans = new StransComponent();
         DtransComponent dtrans = new DtransComponent();
         MtransComponent mtrans = new MtransComponent();
-        BoardComponent boardcom = new BoardComponent(10,10,1,0,10,5);
+        final BoardComponent boardcom = new BoardComponent(10,10,1,0,50,5);
         
 
         start.start.addActionListener(new ActionListener() {
@@ -95,9 +74,6 @@ public class GameFrame extends JFrame{
                 setContentPane(mtrans);
             }
         });
-
-        
-
         help.rets.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -121,7 +97,6 @@ public class GameFrame extends JFrame{
         strans.primary.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
                 setContentPane(boardcom);
             }
         });
@@ -132,7 +107,7 @@ public class GameFrame extends JFrame{
                 setContentPane(trans);
             }
         });
-
+        
         mtrans.rets.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -143,7 +118,12 @@ public class GameFrame extends JFrame{
         
 
 
-        
+        boardcom.rets.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setContentPane(start);
+            }
+        });
 
         setContentPane(start);
         
