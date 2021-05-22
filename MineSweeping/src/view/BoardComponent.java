@@ -182,6 +182,8 @@ public class BoardComponent extends JPanel {
                                 }
                             }
                             setMapData();
+                            suMembers[board.getPlayerNow()].setScore(board.getPlayer[board.getPlayerNow()].getScore);
+                            suMembers[board.getPlayerNow()].setMiss(board.getPlayer[board.getPlayerNow()].getMiss);
                         }
                         if (e.getButton() == MouseEvent.BUTTON3){
                             if (board.getOpenState(finalI,finalJ)==1){

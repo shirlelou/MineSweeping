@@ -21,6 +21,14 @@ public class SUMember extends JPanel{
 
     }
 
+    public void setMiss(int miss) {
+        this.miss = miss;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     public void accessMemberImage(){
         initMemberImage();
         memberImage.setBounds(0,0,160,160);
