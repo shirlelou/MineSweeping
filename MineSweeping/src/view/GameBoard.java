@@ -28,7 +28,7 @@ public class GameBoard extends JPanel{
         for (int i = 1; i <= this.rows; i++) {
             for (int j = 1; j <= this.cols; j++) {
                 buttons[i][j] = new JButton(blank);
-                buttons[i][j].setBounds((j-1) * 25 + 230+(260-(25*cols)/2), (i-1) * 25 + 48+(300-(25*rows)/2), BlockWidth, BlockHeight);
+                buttons[i][j].setBounds((j-1) * 25 + 220+(380-(25*cols)/2), (i-1) * 25 + 77+(300-(25*rows)/2), BlockWidth, BlockHeight);
                 add(buttons[i][j]);
             }
         }
