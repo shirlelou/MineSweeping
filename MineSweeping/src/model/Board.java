@@ -1,12 +1,14 @@
 package model;
 
+<<<<<<< HEAD
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+=======
+>>>>>>> 4ba9d48f2e553a3568318baecd3b07ccf7112dc6
 import java.util.Random;
 
-import jdk.jfr.events.FileWriteEvent;
 public class Board {
     int row;
     int col;
@@ -19,7 +21,7 @@ public class Board {
     int move;
     boolean hadinit;
     int remain;
-    boolean isend;
+    public boolean isend;
     
     Player[] players;
 
@@ -39,6 +41,7 @@ public class Board {
         isend=false;
     }
 
+<<<<<<< HEAD
     public Board(){
         FileInputStream document = null;
         //继续游戏 读取存档
@@ -58,13 +61,15 @@ public class Board {
        
     }
 
+=======
+>>>>>>> 4ba9d48f2e553a3568318baecd3b07ccf7112dc6
 
     public int getMineState(int x,int y){
         return gridInfo[x][y]/10;
     }
     public int getOpenState(int x,int y){
         return gridInfo[x][y]%10;
-        //1:关闭；2:标记；3:打开
+
     }
     public void setOpenState(int x,int y,int i){
         gridInfo[x][y]=gridInfo[x][y]/10*10+i;
@@ -202,7 +207,7 @@ public class Board {
         }
     }
 
-    public void open(int x,int y,boolean[][] ret){
+    private void open(int x,int y,boolean[][] ret){
         
         if(getMineState(x, y)==0){
             ret[x][y]=true;
