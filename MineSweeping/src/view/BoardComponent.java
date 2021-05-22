@@ -39,7 +39,7 @@ public class BoardComponent extends JPanel {
         add(rets);
 
 
-        setSize(818,805);
+        setSize(990,805);
         rows = row;
         cols = col;
         bombCount = mineNum;
@@ -76,10 +76,10 @@ public class BoardComponent extends JPanel {
     }
 
     public void initButtonClick(){
-        for (int i = 0; i < this.rows; i++) {
-            for (int j = 0; j < this.cols; j++) {
-                int finalI = i+1;
-                int finalJ = j+1;
+        for (int i = 1; i <= this.rows; i++) {
+            for (int j = 1; j <= this.cols; j++) {
+                int finalI = i;
+                int finalJ = j;
                 buttons[i][j].addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
@@ -90,7 +90,7 @@ public class BoardComponent extends JPanel {
                             }
                         }
                         if (e.getButton() == MouseEvent.BUTTON1){
-                            if (board.getOpenState(finalI,finalJ)==1){
+                            if (board.getOpenState(finalI,finalJ)==1||board.getOpenState(finalI,finalJ)==0){
 
                                 board.operate(finalI, finalJ,true,ret);
 

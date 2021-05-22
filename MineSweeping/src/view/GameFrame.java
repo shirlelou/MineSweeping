@@ -33,7 +33,7 @@ public class GameFrame extends JFrame{
         setTitle("扫雷游戏");
         setIconImage(icon);
         
-        setSize(818, 815);
+        setSize(1000, 815);
         
         setLocationRelativeTo(null); // Center the window.
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
