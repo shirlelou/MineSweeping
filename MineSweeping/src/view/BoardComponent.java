@@ -84,6 +84,11 @@ public class BoardComponent extends JPanel {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         boolean[][] ret=new boolean[rows+1][cols+1];
+                        for (int k = 1; k < rows+1; k++) {
+                            for (int l = 1; l < cols+1; l++) {
+                                ret[k][l]=false;
+                            }
+                        }
                         if (e.getButton() == MouseEvent.BUTTON1){
                             if (board.getOpenState(finalI,finalJ)==1){
 
@@ -101,15 +106,51 @@ public class BoardComponent extends JPanel {
                                                 Image Open = new ImageIcon("src\\view\\pictures\\blankOpen.jpg").getImage().getScaledInstance(25,25,Image.SCALE_DEFAULT);
                                                 ImageIcon open = new ImageIcon(Open);
                                                 buttons[x][y].setIcon(open);
+                                            }else if(board.getMineState(x,y)==1){
+                                                Image Open = new ImageIcon("src\\view\\pictures\\1.jpg").getImage().getScaledInstance(25,25,Image.SCALE_DEFAULT);
+                                                ImageIcon open = new ImageIcon(Open);
+                                                buttons[x][y].setIcon(open);
+                                            }else if(board.getMineState(x,y)==2){
+                                                Image Open = new ImageIcon("src\\view\\pictures\\2.jpg").getImage().getScaledInstance(25,25,Image.SCALE_DEFAULT);
+                                                ImageIcon open = new ImageIcon(Open);
+                                                buttons[x][y].setIcon(open);
+                                            }else if(board.getMineState(x,y)==3){
+                                                Image Open = new ImageIcon("src\\view\\pictures\\3.jpg").getImage().getScaledInstance(25,25,Image.SCALE_DEFAULT);
+                                                ImageIcon open = new ImageIcon(Open);
+                                                buttons[x][y].setIcon(open);
+                                            }else if(board.getMineState(x,y)==4){
+                                                Image Open = new ImageIcon("src\\view\\pictures\\4.jpg").getImage().getScaledInstance(25,25,Image.SCALE_DEFAULT);
+                                                ImageIcon open = new ImageIcon(Open);
+                                                buttons[x][y].setIcon(open);
+                                            }else if(board.getMineState(x,y)==5){
+                                                Image Open = new ImageIcon("src\\view\\pictures\\5.jpg").getImage().getScaledInstance(25,25,Image.SCALE_DEFAULT);
+                                                ImageIcon open = new ImageIcon(Open);
+                                                buttons[x][y].setIcon(open);
+                                            }else if(board.getMineState(x,y)==6){
+                                                Image Open = new ImageIcon("src\\view\\pictures\\6.jpg").getImage().getScaledInstance(25,25,Image.SCALE_DEFAULT);
+                                                ImageIcon open = new ImageIcon(Open);
+                                                buttons[x][y].setIcon(open);
+                                            }else if(board.getMineState(x,y)==7){
+                                                Image Open = new ImageIcon("src\\view\\pictures\\7.jpg").getImage().getScaledInstance(25,25,Image.SCALE_DEFAULT);
+                                                ImageIcon open = new ImageIcon(Open);
+                                                buttons[x][y].setIcon(open);
+                                            }else if(board.getMineState(x,y)==8){
+                                                Image Open = new ImageIcon("src\\view\\pictures\\8.jpg").getImage().getScaledInstance(25,25,Image.SCALE_DEFAULT);
+                                                ImageIcon open = new ImageIcon(Open);
+                                                buttons[x][y].setIcon(open);
                                             }
                                         }
                                     }
                                 }
                             }
+
                         }
                         if (e.getButton() == MouseEvent.BUTTON3){
                             if (board.getOpenState(finalI,finalJ)==1){
                                 board.operate(finalI, finalJ,false,ret);
+                                Image Flag = new ImageIcon("src\\view\\pictures\\flag.jpg").getImage().getScaledInstance(25,25,Image.SCALE_DEFAULT);
+                                ImageIcon flag = new ImageIcon(Flag);
+                                buttons[finalI][finalJ].setIcon(flag);
                             }
                         }
                     }
