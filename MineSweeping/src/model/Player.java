@@ -11,6 +11,12 @@ public class Player {
     public int getScore() {
         return score;
     }
+    public int getMiss() {
+        return miss;
+    }
+    public int getOrderNum() {
+        return orderNum;
+    }
     
     public Player(int orderNum,boolean ishuman){
         this.orderNum=orderNum;
