@@ -20,7 +20,7 @@ public class DtransComponent extends JPanel{
     @Override
 
         public void paintComponent(Graphics g) {
-            ImageIcon background=new ImageIcon("");
+            ImageIcon background=new ImageIcon("src\\view\\pictures\\background.gif");
 
             g.drawImage(background.getImage(), 0, 0, getWidth(), getHeight(), null);
 

@@ -1,5 +1,8 @@
 package model;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Random;
 public class Board {
     int row;
@@ -31,6 +34,25 @@ public class Board {
         move=0;
         remain=mineNum;
         isend=false;
+    }
+
+    public Board(){
+        FileInputStream document = null;
+        //继续游戏 读取存档
+        try {
+            document = new FileInputStream("");
+        } catch (FileNotFoundException e) {
+            //TODO: handle exception
+        }finally{
+            if(document != null){
+                try {
+                    document.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+       
     }
 
 
