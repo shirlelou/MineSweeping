@@ -67,10 +67,7 @@ public class GameFrame extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 setContentPane(help);
             }
-        });
-
-        
-        
+        });        
         trans.rets.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

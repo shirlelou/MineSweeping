@@ -220,7 +220,7 @@ public class Board {
             if(getMineState(x-1,y+1)!=9&&getOpenState(x-1, y+1)==1)open(x-1,y+1,ret);
             if(getMineState(x,y-1)!=9&&getOpenState(x, y-1)==1)open(x,y-1,ret);
             if(getMineState(x,y+1)!=9&&getOpenState(x, y+1)==1)open(x,y+1,ret);
-            if(getMineState(x+1,y-1)!=9&&getOpenState(x+1, y+1)==1)open(x+1,y-1,ret);
+            if(getMineState(x+1,y-1)!=9&&getOpenState(x+1, y-1)==1)open(x+1,y-1,ret);
             if(getMineState(x+1,y)!=9&&getOpenState(x+1, y)==1)open(x+1,y,ret);
             if(getMineState(x+1,y+1)!=9&&getOpenState(x+1, y+1)==1)open(x+1,y+1,ret);
             ret[x][y]=true;
