@@ -17,7 +17,7 @@ public class Board {
     int playerNow;
     int moveNum;
     int move;
-    boolean hadinit;
+    public boolean hadinit;
     int remain;
     public boolean isend;
     

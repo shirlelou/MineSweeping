@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+
 
 public class GameFrame extends JFrame{ 
 
@@ -33,14 +33,14 @@ public class GameFrame extends JFrame{
         final BoardComponent[] diyboardcom = new BoardComponent[10];
         BoardComponent boardcom = new BoardComponent(10,10,1,0,9,5);
 
-      /*  for(int i=0;i<=9;i++){
+     /*   for(int i=0;i<=9;i++){
             priboardcom[i] = new BoardComponent(10, 10, 10 , 5);
             midboardcom[i] = new BoardComponent(16, 16, 40 , 5);
             advboardcom[i] = new BoardComponent(24, 30, 99 , 5);
             diyboardcom[i] = new BoardComponent(1);
             
-        }*/
-        
+        }
+        */
 
         start.start.addActionListener(new ActionListener() {
             @Override
@@ -113,6 +113,20 @@ public class GameFrame extends JFrame{
                 setContentPane(boardcom);
             }
         });
+        strans.middle.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setContentPane(boardcom);
+            }
+        });
+        strans.advance.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setContentPane(boardcom);
+            }
+        });
+
+
 
         dtrans.rets.addActionListener(new ActionListener() {
             @Override
