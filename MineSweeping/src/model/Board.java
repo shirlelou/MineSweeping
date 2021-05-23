@@ -8,10 +8,10 @@ import java.io.IOException;
 import java.util.Random;
 
 public class Board {
-    int row;
-    int col;
+    public int row;
+    public int col;
     int playerNum;
-    int[][] gridInfo;
+    public int[][] gridInfo;
     int aiNum;
     int mineNum;
     int playerNow;
@@ -90,6 +90,21 @@ public class Board {
         return players;
     }
 
+    public void setMove(int move) {
+        this.move = move;
+    }
+    public void setPlayerNow(int playerNow) {
+        this.playerNow = playerNow;
+    }
+    public void setRemain(int remain) {
+        this.remain = remain;
+    }
+    public int getPlayerNum() {
+        return playerNum;
+    }
+    public int getAiNum() {
+        return aiNum;
+    }
     
     private boolean check1(int x,int y){
         if(gridInfo[x][y-1]==91&&gridInfo[x][y-2]==91
@@ -338,7 +353,7 @@ public class Board {
 
         if(isEnd()){
             isend=true;  
-            File out = new File("out.txt");  
+            File out = new File("out\\out.txt");  
             // 路径为文件且不为空则进行删除  
             if (out.isFile() && out.exists()) {  
                 out.delete();    
@@ -349,10 +364,15 @@ public class Board {
 
         FileWriter out = null;
         try {
-            out = new FileWriter("out.txt");
+            out = new FileWriter("out\\out.txt");
             out.write(playerNum+" "+aiNum+" "+moveNum+"\n");
             out.write(row+" "+col+" "+mineNum+"\n");
             out.write(playerNow+" "+move+" "+remain+"\n");
+            for(int i=1;i<=playerNum+aiNum;i++){
+                out.write(players[i].getScore()+" ");
+                out.write(players[i].getMiss()+"");
+                out.write("\n");
+            }
             for(int i=1;i<=row;i++){
                 for(int j=1;j<=col;j++){
                     out.write(gridInfo[i][j]+" ");

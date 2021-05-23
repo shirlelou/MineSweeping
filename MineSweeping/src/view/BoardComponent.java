@@ -24,7 +24,7 @@ public class BoardComponent extends JPanel {
     private JButton[][] buttons;
     private SUMember[] suMembers;
     private GameBoard gameBoard;
-    private Board board;
+    public Board board;
     private JLabel mapData=new JLabel();
     private JButton cheat;
     private JPanel choose;
@@ -141,14 +141,14 @@ public class BoardComponent extends JPanel {
             add(suMembers[i]);
         }
 
-        setMapData();
-        add(mapData);
         
-
-
         initButtonClick();
         gameBoard.setButtons(buttons);
         add(gameBoard);
+
+        setMapData();
+        add(mapData);
+        
     }
 
 
@@ -268,7 +268,7 @@ public class BoardComponent extends JPanel {
                             }
                             String memberData = suMembers[board.getPlayerNow()].getName(board.getPlayerNow())+" 得分数:"+board.getPlayers()[board.getPlayerNow()].getScore()+"失误数:"+board.getPlayers()[board.getPlayerNow()].getMiss();
                             suMembers[board.getPlayerNow()].scoreBoard.setText(memberData);
-                            if(board.isend){
+                           /* if(board.isend){
                                 int max=0;
                                 for(int i=1;i<=playerNum+AINum;i++){
                                     if(board.getPlayers()[i].getScore()>board.getPlayers()[max].getScore()){
@@ -279,7 +279,7 @@ public class BoardComponent extends JPanel {
                                     }
                                 }
                                 JOptionPane.showMessageDialog(gameBoard, "", "游戏结束", JOptionPane.INFORMATION_MESSAGE, null);
-                            }    //TODO:结束判断,并补充插旗结束                        
+                            }    //TODO:结束判断,并补充插旗结束  */                      
                         }
                         if (e.getButton() == MouseEvent.BUTTON3){
                             if (board.getOpenState(finalI,finalJ)==1){
