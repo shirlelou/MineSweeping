@@ -17,6 +17,12 @@ public class Player {
     public int getOrderNum() {
         return orderNum;
     }
+    public void setMiss(int miss) {
+        this.miss = miss;
+    }
+    public void setScore(int score) {
+        this.score = score;
+    }
     
     public Player(int orderNum,boolean ishuman){
         this.orderNum=orderNum;

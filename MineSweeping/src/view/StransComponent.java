@@ -12,7 +12,6 @@ public class StransComponent extends JPanel{
     public JButton primary;
     public JButton middle;
     public JButton advance;
-    public JButton DIY;
     
 
 
@@ -35,7 +34,6 @@ public class StransComponent extends JPanel{
         primary = new JButton("初级");
         middle = new JButton("中级");
         advance = new JButton("高级");
-        DIY = new JButton("自定义");
         music = new JButton(musicicon);
 
         Image retsicon = new ImageIcon("src\\view\\pictures\\returnicon.jpg").getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT);
@@ -49,7 +47,6 @@ public class StransComponent extends JPanel{
         primary.setBounds(230,350,350,50);
         advance.setBounds(230,550,350,50);
         middle.setBounds(230,450,350,50);
-        DIY.setBounds(230,650,350,50);
         music.setBounds(758,725,50,50);
 
 
@@ -59,7 +56,6 @@ public class StransComponent extends JPanel{
         add(primary);
         add(middle);
         add(advance);
-        add(DIY);
         add(music);
         
     }

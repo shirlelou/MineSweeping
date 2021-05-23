@@ -13,6 +13,7 @@ public class TransComponent extends JPanel{
     public JButton one;
     public JButton two;
     public JButton many;
+    public JButton diy;
     
 
 
@@ -52,6 +53,7 @@ public class TransComponent extends JPanel{
         one = new JButton("单人游戏");
         two = new JButton("双人游戏");
         many = new JButton("多人游戏");
+        diy = new JButton("自定义");
         
         
 
@@ -60,6 +62,7 @@ public class TransComponent extends JPanel{
         one.setBounds(230,350,350,50);
         two.setBounds(230,450,350,50);
         many.setBounds(230,550,350,50);
+        diy.setBounds(230,650,350,50);
         
 
 
@@ -68,6 +71,7 @@ public class TransComponent extends JPanel{
         add(one);
         add(two);
         add(many);
+        add(diy);
         
         
         setOpaque(true);
