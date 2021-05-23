@@ -42,7 +42,7 @@ public class SUMember extends JPanel{
     }
 
     public void SUMemData() {
-        memberData = getName(orderNum)+" 得分数:"+score+"失误数:"+miss;
+        memberData = getName(orderNum)+" 得分:"+score+"失误:"+miss;
         scoreBoard.setText(memberData);
         add(scoreBoard);
     }
