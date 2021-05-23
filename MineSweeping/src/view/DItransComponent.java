@@ -40,6 +40,41 @@ public class DItransComponent extends JPanel{
         music.setBorderPainted(false);
        
         add(music);
-        
+
+        JTextField setRows = new JTextField();
+        JTextField setCols = new JTextField();
+        JTextField setMineNum = new JTextField();
+        JTextField setPlayerNum = new JTextField();
+        JLabel Rows = new JLabel("输入行数");
+        JLabel Cols = new JLabel("输入列数");
+        JLabel MineNum = new JLabel("输入地雷数");
+        JLabel PlayerNum = new JLabel("输入玩家数");
+
+        Font font = new Font("黑体",Font.BOLD,10);
+        Rows.setFont(font);
+        Cols.setFont(font);
+        MineNum.setFont(font);
+        PlayerNum.setFont(font);
+        Rows.setBounds(425,380,40,10);
+        Cols.setBounds(455,380,40,10);
+        MineNum.setBounds(510,380,50,10);
+        PlayerNum.setBounds(540,380,50,10);
+        add(Rows);
+        add(Cols);
+        add(MineNum);
+        add(PlayerNum);
+
+        setRows.setFont(font);
+        setCols.setFont(font);
+        setMineNum.setFont(font);
+        setPlayerNum.setFont(font);
+        setRows.setBounds(430,400,30,10);
+        setCols.setBounds(460,400,30,10);
+        setMineNum.setBounds(515,400,40,10);
+        setPlayerNum.setBounds(550,400,30,10);
+        add(setRows);
+        add(setCols);
+        add(setMineNum);
+        add(setPlayerNum);
     }
 }
