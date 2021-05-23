@@ -35,6 +35,7 @@ public class GameFrame extends JFrame{
         DItransComponent dItransComponent = new DItransComponent();
         final BoardComponent[] boardcom = new BoardComponent[40];
         Number n=new Number();
+        Number mu = new Number();
 
 
         for(int i=0;i<40;i++){
@@ -124,6 +125,8 @@ public class GameFrame extends JFrame{
                         } catch (IOException e2) {
                             e2.printStackTrace();
                         }
+
+/*
                         try {
                             nextline = br.readLine();
                             int[] a = new int[40];
@@ -136,16 +139,16 @@ public class GameFrame extends JFrame{
                             int miss = a[1];   
                             for(int i=1;i<=boardcom[n.i].board.getPlayerNum()+boardcom[n.i].board.getAiNum();i++){
                                 boardcom[n.i].board.getPlayers()[i].setScore(score);
-                                boardcom[n.i].board.getPlayers()[i].setMiss(2);
+                                boardcom[n.i].board.getPlayers()[i].setMiss(miss);
                             }
                                     
                                 
                         } catch (IOException e2) {
                             e2.printStackTrace();
-                        }
-
+                        }*/
+/*
                         int tmp = 1;
-                       /* try {
+                        try {
                             while(br.readLine()!=null){
                                 nextline = br.readLine();
                                 int[] a = new int[40];
@@ -194,6 +197,19 @@ public class GameFrame extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 setContentPane(help);
+            }
+        });
+        start.music.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                    
+                    if (mu.i%2==1){
+                        Music.loop();
+                    }else {
+                        Music.stop();
+                    }
+                mu.i++;
             }
         });        
         trans.rets.addActionListener(new ActionListener() {
@@ -254,10 +270,11 @@ public class GameFrame extends JFrame{
         strans.primary.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                boardcom[n.i].setSuMembers(1, 0, 5);
+                /*boardcom[n.i].setSuMembers(1, 0, 5);
                 boardcom[n.i].setBoard(9 , 9, 10);
                 setContentPane(boardcom[n.i]);     
-                n.i++;
+                n.i++;*/
+                setContentPane(new BoardComponent(10,10,2,0,10,5));
             }
         });
         strans.middle.addActionListener(new ActionListener() {

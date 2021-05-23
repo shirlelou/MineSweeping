@@ -27,7 +27,7 @@ public class Music {
     public static void loop(){
         try {
             music=AudioSystem.getClip();
-            File file=new File("src//music//bgm1.wav");
+            File file=new File("src\\view\\music\\bgm1.wav");
             FileInputStream fileInputStream =new FileInputStream(file);
             InputStream is =new BufferedInputStream(fileInputStream);
             if (is != null) {

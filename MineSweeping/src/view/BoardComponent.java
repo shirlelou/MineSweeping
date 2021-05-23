@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -27,7 +26,6 @@ public class BoardComponent extends JPanel {
     public Board board;
     private JLabel mapData=new JLabel();
     private JButton cheat;
-    private JPanel choose;
 
 
     public BoardComponent(){
@@ -91,7 +89,7 @@ public class BoardComponent extends JPanel {
     public BoardComponent(int row,int col,int playerNum,int aiNum,int mineNum,int moveNum){
 
         setLayout(null);
-        this.moveNum=moveNum;
+        
         Image retsicon = new ImageIcon("src\\view\\pictures\\returnicon.jpg").getImage().getScaledInstance(65,65,Image.SCALE_DEFAULT);
         ImageIcon returnicon = new ImageIcon(retsicon);
 
@@ -141,13 +139,16 @@ public class BoardComponent extends JPanel {
             add(suMembers[i]);
         }
 
+        add(mapData);
+        setMapData();
+
         
         initButtonClick();
         gameBoard.setButtons(buttons);
         add(gameBoard);
 
-        setMapData();
-        add(mapData);
+        
+        
         
     }
 
