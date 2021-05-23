@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class SUMember extends JPanel{
     private JButton memberImage = new JButton();
-    private JLabel scoreBoard = new JLabel();
+    public JLabel scoreBoard = new JLabel();
     private int orderNum;
     private int score = 0;
     private int miss = 0;

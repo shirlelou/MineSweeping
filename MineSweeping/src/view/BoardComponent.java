@@ -181,9 +181,19 @@ public class BoardComponent extends JPanel {
                                     }
                                 }
                             }
-                            setMapData();
-                            suMembers[board.getPlayerNow()].setScore(board.getPlayer[board.getPlayerNow()].getScore);
-                            suMembers[board.getPlayerNow()].setMiss(board.getPlayer[board.getPlayerNow()].getMiss);
+                            if (playerNum+AINum==1){
+                                String MapData = "当前玩家:"+suMembers[board.getPlayerNow()].getName(board.getPlayerNow())+
+                                        " 剩余雷数:"+board.getRemain();
+                                mapData.setText(MapData);
+                            }else {
+                                String MapData = "当前玩家:"+suMembers[board.getPlayerNow()].getName(board.getPlayerNow())+
+                                        " 剩余雷数:"+board.getRemain()+
+                                        " 剩余行动数:"+ (moveNum-board.getMove());
+                                mapData.setText(MapData);
+                            }
+                            String memberData = suMembers[board.getPlayerNow()].getName(board.getPlayerNow())+" 得分数:"+board.getPlayers()[board.getPlayerNow()].getScore()+"失误数:"+board.getPlayers()[board.getPlayerNow()].getMiss();
+                            suMembers[board.getPlayerNow()].scoreBoard.setText(memberData);
+                            
                         }
                         if (e.getButton() == MouseEvent.BUTTON3){
                             if (board.getOpenState(finalI,finalJ)==1){
@@ -248,6 +258,8 @@ public class BoardComponent extends JPanel {
                                 }
                             }
                             setMapData();
+                            String memberData = suMembers[board.getPlayerNow()].getName(board.getPlayerNow())+" 得分数:"+board.getPlayers()[board.getPlayerNow()].getScore()+"失误数:"+board.getPlayers()[board.getPlayerNow()].getMiss();
+                            suMembers[board.getPlayerNow()].scoreBoard.setText(memberData);
                         }
 
                         int now = board.getPlayerNow();

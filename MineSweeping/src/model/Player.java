@@ -3,8 +3,8 @@ package model;
 public class Player {
     private boolean ishuman;
     private int orderNum;
-    private int miss;
-    private int score;
+    private int miss=0;
+    private int score=0;
 
 
 
