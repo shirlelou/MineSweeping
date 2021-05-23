@@ -27,20 +27,19 @@ public class GameFrame extends JFrame{
         StransComponent strans = new StransComponent();
         DtransComponent dtrans = new DtransComponent();
         MtransComponent mtrans = new MtransComponent();
-        final BoardComponent[] priboardcom = new BoardComponent[10];
-        final BoardComponent[] midboardcom = new BoardComponent[10];
-        final BoardComponent[] advboardcom = new BoardComponent[10];
-        final BoardComponent[] diyboardcom = new BoardComponent[10];
-        BoardComponent boardcom = new BoardComponent(10,10,1,0,9,5);
+        final BoardComponent[] boardcom = new BoardComponent[40];
+        Number n=new Number();
 
-     /*   for(int i=0;i<=9;i++){
-            priboardcom[i] = new BoardComponent(10, 10, 10 , 5);
-            midboardcom[i] = new BoardComponent(16, 16, 40 , 5);
-            advboardcom[i] = new BoardComponent(24, 30, 99 , 5);
-            diyboardcom[i] = new BoardComponent(1);
-            
+
+        for(int i=0;i<40;i++){
+            boardcom[i]=new BoardComponent();
+            boardcom[i].rets.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setContentPane(start);
+                }
+            });
         }
-        */
 
         start.start.addActionListener(new ActionListener() {
             @Override
@@ -107,27 +106,34 @@ public class GameFrame extends JFrame{
                 setContentPane(trans);
             }
         });
+
         strans.primary.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setContentPane(boardcom);
+                boardcom[n.i].setSuMembers(1, 0, 5);
+                boardcom[n.i].setBoard(9 , 9, 10);
+                setContentPane(boardcom[n.i]);     
+                n.i++;
             }
         });
         strans.middle.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setContentPane(boardcom);
+                boardcom[n.i].setSuMembers(1, 0, 5);
+                boardcom[n.i].setBoard(16 , 16, 40);
+                setContentPane(boardcom[n.i]);
+                n.i++;
             }
         });
         strans.advance.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setContentPane(boardcom);
+                boardcom[n.i].setSuMembers(1, 0, 5);
+                boardcom[n.i].setBoard(16 , 30, 99);
+                setContentPane(boardcom[n.i]);
+                n.i++;
             }
         });
-
-
-
         dtrans.rets.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -145,12 +151,7 @@ public class GameFrame extends JFrame{
         
 
 
-        boardcom.rets.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setContentPane(start);
-            }
-        });
+        
 
         setContentPane(start);
         
