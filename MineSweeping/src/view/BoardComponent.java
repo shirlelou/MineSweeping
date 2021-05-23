@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -26,13 +27,71 @@ public class BoardComponent extends JPanel {
     private Board board;
     private JLabel mapData=new JLabel();
     private JButton cheat;
+    private JPanel choose;
 
 
+    public BoardComponent(){
+        setLayout(null);
+        setSize(990,805);
+
+        Image retsicon = new ImageIcon("src\\view\\pictures\\returnicon.jpg").getImage().getScaledInstance(65,65,Image.SCALE_DEFAULT);
+        ImageIcon returnicon = new ImageIcon(retsicon);
+        rets = new JButton(returnicon);
+        rets.setBounds(0,0,50,50);
+        rets.setBorderPainted(false);
+        add(rets);
+
+        Image cheatt = new ImageIcon("src\\view\\pictures\\cheaticon.png").getImage().getScaledInstance(100,100,Image.SCALE_DEFAULT);
+        ImageIcon cheaticon = new ImageIcon(cheatt);
+        cheat = new JButton(cheaticon);
+        cheat.setBounds(910,10,65,65);
+        add(cheat);
+
+    }
+
+    public void setSuMembers(int  playerNum,int aiNum,int moveNum) {
+        suMembers=new SUMember[playerNum+AINum+1];
+        this.playerNum=playerNum;
+        AINum=aiNum;
+        for(int i=1;i<=playerNum+AINum;i++){
+            suMembers[i]=new SUMember(i);
+            if(i==1){
+                suMembers[i].setBounds(50,9,160,190);
+            }
+            if(i==2){
+                suMembers[i].setBounds(50,208,160,190);
+            }
+            if(i==3){
+                suMembers[i].setBounds(50,407,160,190);
+            }
+            if(i==4){
+                suMembers[i].setBounds(50,606,160,190);
+            }
+            add(suMembers[i]);
+        }
+    }
+    public void setBoard(int rows,int cols,int mineNum){
+        this.rows = rows;
+        this.cols = cols;
+        this.bombCount = mineNum;
+        gameBoard = new GameBoard(rows,cols);
+        buttons = gameBoard.getButtons();
+
+        board = new Board(rows,cols,playerNum,AINum,mineNum,moveNum);
+
+        initButtonClick();
+        gameBoard.setButtons(buttons);
+        add(gameBoard);
+
+        setMapData();
+        add(mapData);
+
+    }
 
     public BoardComponent(int row,int col,int playerNum,int aiNum,int mineNum,int moveNum){
 
         setLayout(null);
-
+        this.moveNum=moveNum;
         Image retsicon = new ImageIcon("src\\view\\pictures\\returnicon.jpg").getImage().getScaledInstance(65,65,Image.SCALE_DEFAULT);
         ImageIcon returnicon = new ImageIcon(retsicon);
 
@@ -82,8 +141,9 @@ public class BoardComponent extends JPanel {
             add(suMembers[i]);
         }
 
-        add(mapData);
         setMapData();
+        add(mapData);
+        
 
 
         initButtonClick();
@@ -92,10 +152,7 @@ public class BoardComponent extends JPanel {
     }
 
 
-    public BoardComponent(){
-
-    }
-
+   
 
 
     public void setMapData(){
@@ -212,9 +269,17 @@ public class BoardComponent extends JPanel {
                             String memberData = suMembers[board.getPlayerNow()].getName(board.getPlayerNow())+" 得分数:"+board.getPlayers()[board.getPlayerNow()].getScore()+"失误数:"+board.getPlayers()[board.getPlayerNow()].getMiss();
                             suMembers[board.getPlayerNow()].scoreBoard.setText(memberData);
                             if(board.isend){
-                                EndFrame frame = new EndFrame();
-                                frame.setVisible(true); 
-                            }                            
+                                int max=0;
+                                for(int i=1;i<=playerNum+AINum;i++){
+                                    if(board.getPlayers()[i].getScore()>board.getPlayers()[max].getScore()){
+                                        max=i;
+                                    }
+                                    else if(board.getPlayers()[i].getScore()==board.getPlayers()[max].getScore()){
+                                        if(board.getPlayers()[i].getMiss()==board.getPlayers()[max].getMiss());
+                                    }
+                                }
+                                JOptionPane.showMessageDialog(gameBoard, "", "游戏结束", JOptionPane.INFORMATION_MESSAGE, null);
+                            }    //TODO:结束判断,并补充插旗结束                        
                         }
                         if (e.getButton() == MouseEvent.BUTTON3){
                             if (board.getOpenState(finalI,finalJ)==1){

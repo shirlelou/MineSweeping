@@ -13,6 +13,15 @@ public class GameBoard extends JPanel{
     Image Blank = new ImageIcon("src\\view\\pictures\\blankClosed.jpg").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
     ImageIcon blank = new ImageIcon(Blank);
 
+    @Override
+
+    public void paintComponent(Graphics g) {
+        ImageIcon background=new ImageIcon("src\\view\\pictures\\background.gif");
+
+        g.drawImage(background.getImage(), 0, 0, getWidth(), getHeight(), null);
+
+    }
+
     public GameBoard(int row,int col){
         setSize(990,805);
         setLayout(null);
