@@ -27,6 +27,7 @@ public class GameFrame extends JFrame{
         StransComponent strans = new StransComponent();
         DtransComponent dtrans = new DtransComponent();
         MtransComponent mtrans = new MtransComponent();
+        
         final BoardComponent[] boardcom = new BoardComponent[40];
         Number n=new Number();
 
