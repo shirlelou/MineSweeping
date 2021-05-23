@@ -26,6 +26,7 @@ public class BoardComponent extends JPanel {
     public Board board;
     private JLabel mapData=new JLabel();
     private JButton cheat;
+    private Number cheatNum = new Number();
 
 
     public BoardComponent(){
@@ -50,6 +51,7 @@ public class BoardComponent extends JPanel {
     public void setSuMembers(int  playerNum,int aiNum,int moveNum) {
         suMembers=new SUMember[playerNum+AINum+1];
         this.playerNum=playerNum;
+        this.moveNum=moveNum;
         AINum=aiNum;
         for(int i=1;i<=playerNum+AINum;i++){
             suMembers[i]=new SUMember(i);
@@ -77,12 +79,13 @@ public class BoardComponent extends JPanel {
 
         board = new Board(rows,cols,playerNum,AINum,mineNum,moveNum);
 
+        add(mapData);
+        setMapData();
+
+
         initButtonClick();
         gameBoard.setButtons(buttons);
         add(gameBoard);
-
-        setMapData();
-        add(mapData);
 
     }
 
@@ -147,7 +150,7 @@ public class BoardComponent extends JPanel {
         gameBoard.setButtons(buttons);
         add(gameBoard);
 
-        
+
         
         
     }
@@ -267,9 +270,9 @@ public class BoardComponent extends JPanel {
                                         " 剩余行动数:"+ (moveNum-board.getMove());
                                 mapData.setText(MapData);
                             }
-                            String memberData = suMembers[board.getPlayerNow()].getName(board.getPlayerNow())+" 得分数:"+board.getPlayers()[board.getPlayerNow()].getScore()+"失误数:"+board.getPlayers()[board.getPlayerNow()].getMiss();
-                            suMembers[board.getPlayerNow()].scoreBoard.setText(memberData);
-                           /* if(board.isend){
+                            String memberData = suMembers[used].getName(used)+" 得分:"+board.getPlayers()[used].getScore()+"失误:"+board.getPlayers()[used].getMiss();
+                            suMembers[used].scoreBoard.setText(memberData);
+                            if(board.isend){
                                 int max=0;
                                 for(int i=1;i<=playerNum+AINum;i++){
                                     if(board.getPlayers()[i].getScore()>board.getPlayers()[max].getScore()){
@@ -280,7 +283,7 @@ public class BoardComponent extends JPanel {
                                     }
                                 }
                                 JOptionPane.showMessageDialog(gameBoard, "", "游戏结束", JOptionPane.INFORMATION_MESSAGE, null);
-                            }    //TODO:结束判断,并补充插旗结束  */                      
+                            }
                         }
                         if (e.getButton() == MouseEvent.BUTTON3){
                             if (board.getOpenState(finalI,finalJ)==1){
@@ -344,9 +347,18 @@ public class BoardComponent extends JPanel {
                                     }
                                 }
                             }
-                            setMapData();
-                            String memberData = suMembers[board.getPlayerNow()].getName(board.getPlayerNow())+" 得分数:"+board.getPlayers()[board.getPlayerNow()].getScore()+"失误数:"+board.getPlayers()[board.getPlayerNow()].getMiss();
-                            suMembers[board.getPlayerNow()].scoreBoard.setText(memberData);
+                            if (playerNum+AINum==1){
+                                String MapData = "当前玩家:"+suMembers[board.getPlayerNow()].getName(board.getPlayerNow())+
+                                        " 剩余雷数:"+board.getRemain();
+                                mapData.setText(MapData);
+                            }else {
+                                String MapData = "当前玩家:"+suMembers[board.getPlayerNow()].getName(board.getPlayerNow())+
+                                        " 剩余雷数:"+board.getRemain()+
+                                        " 剩余行动数:"+ (moveNum-board.getMove());
+                                mapData.setText(MapData);
+                            }
+                            String memberData = suMembers[used].getName(used)+" 得分:"+board.getPlayers()[used].getScore()+"失误:"+board.getPlayers()[used].getMiss();
+                            suMembers[used].scoreBoard.setText(memberData);
                         }
 
                         int now = board.getPlayerNow();
@@ -406,27 +418,38 @@ public class BoardComponent extends JPanel {
         cheat.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(board.hadinit){
+                cheatNum.i++;
+                if (cheatNum.i%2==1){
+                    if(board.hadinit){
+                        for(int x=1;x<=rows;x++){
+                            for(int y=1;y<=cols;y++){
+                                Image cheatmine = new ImageIcon("src\\view\\pictures\\mineCheat.jpg").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                                ImageIcon cheatmineicon = new ImageIcon(cheatmine);
+                                if(board.getMineState(x, y)==9 && board.getOpenState(x,y)==1)buttons[x][y].setIcon(cheatmineicon);
+                            }
+                        }
+                    }
+                    else{
+                        board.boardInit(1,1);
+                        board.hadinit=true;
+                        for(int x=1;x<=rows;x++){
+                            for(int y=1;y<=cols;y++){
+                                Image cheatmine = new ImageIcon("src\\view\\pictures\\mineCheat.jpg").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                                ImageIcon cheatmineicon = new ImageIcon(cheatmine);
+                                if(board.getMineState(x, y)==9 && board.getOpenState(x,y)==1)buttons[x][y].setIcon(cheatmineicon);
+                            }
+                        }
+                    }
+                }else {
                     for(int x=1;x<=rows;x++){
                         for(int y=1;y<=cols;y++){
-                            Image cheatmine = new ImageIcon("src\\view\\pictures\\mineCheat.jpg").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
-                            ImageIcon cheatmineicon = new ImageIcon(cheatmine);
-                            if(board.getMineState(x, y)==9)buttons[x][y].setIcon(cheatmineicon);
+                            Image Blank = new ImageIcon("src\\view\\pictures\\blankClosed.jpg").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                            ImageIcon blank = new ImageIcon(Blank);
+                            if(board.getMineState(x, y)==9 && board.getOpenState(x,y)==1)buttons[x][y].setIcon(blank);
                         }
                     }
                 }
-                else{
-                    board.boardInit(1,1);
-                    board.hadinit=true;
-                    for(int x=1;x<=rows;x++){
-                        for(int y=1;y<=cols;y++){
-                            Image cheatmine = new ImageIcon("src\\view\\pictures\\mineCheat.jpg").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
-                            ImageIcon cheatmineicon = new ImageIcon(cheatmine);
-                            if(board.getMineState(x, y)==9)buttons[x][y].setIcon(cheatmineicon);
-                        }
-                    }
 
-                }
             }
         });
     }
