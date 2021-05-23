@@ -59,6 +59,9 @@ public class StartComponent extends JPanel{
         add(story);
         add(help);
         add(music);
+
+
+        
         
     }
 }

@@ -17,7 +17,7 @@ public class Board {
     int playerNow;
     int moveNum;
     int move;
-    boolean hadinit;
+    public boolean hadinit;
     int remain;
     public boolean isend;
     
@@ -85,6 +85,9 @@ public class Board {
     }
     public int getPlayerNow() {
         return playerNow;
+    }
+    public Player[] getPlayers() {
+        return players;
     }
 
     
@@ -265,11 +268,13 @@ public class Board {
         ret[x][y]=true;
         setOpenState(x, y, 3);
         players[playerNow].mineOpen();
+        remain--;
     }
     public void mineMark(int x,int y,boolean[][] ret){
         ret[x][y]=true;
         setOpenState(x, y, 2);
         players[playerNow].mineMark();
+        remain--;
     }
 
     private void changePlayer(){

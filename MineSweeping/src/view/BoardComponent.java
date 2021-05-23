@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class BoardComponent extends JPanel {
@@ -23,6 +25,7 @@ public class BoardComponent extends JPanel {
     private GameBoard gameBoard;
     private Board board;
     private JLabel mapData=new JLabel();
+    private JButton cheat;
 
 
 
@@ -30,7 +33,7 @@ public class BoardComponent extends JPanel {
 
         setLayout(null);
 
-        Image retsicon = new ImageIcon("src\\view\\pictures\\returnicon.jpg").getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT);
+        Image retsicon = new ImageIcon("src\\view\\pictures\\returnicon.jpg").getImage().getScaledInstance(65,65,Image.SCALE_DEFAULT);
         ImageIcon returnicon = new ImageIcon(retsicon);
 
 
@@ -44,6 +47,14 @@ public class BoardComponent extends JPanel {
         rows = row;
         cols = col;
         bombCount = mineNum;
+
+        Image cheatt = new ImageIcon("src\\view\\pictures\\cheaticon.png").getImage().getScaledInstance(100,100,Image.SCALE_DEFAULT);
+        ImageIcon cheaticon = new ImageIcon(cheatt);
+        cheat = new JButton(cheaticon);
+        cheat.setBounds(910,10,65,65);
+        add(cheat);
+
+        
 
         this.playerNum=playerNum;
         AINum=aiNum;
@@ -79,6 +90,13 @@ public class BoardComponent extends JPanel {
         gameBoard.setButtons(buttons);
         add(gameBoard);
     }
+
+
+    public BoardComponent(){
+
+    }
+
+
 
     public void setMapData(){
         if (playerNum+AINum==1){
@@ -181,9 +199,22 @@ public class BoardComponent extends JPanel {
                                     }
                                 }
                             }
-                            setMapData();
-                            suMembers[board.getPlayerNow()].setScore(board.getPlayer[board.getPlayerNow()].getScore);
-                            suMembers[board.getPlayerNow()].setMiss(board.getPlayer[board.getPlayerNow()].getMiss);
+                            if (playerNum+AINum==1){
+                                String MapData = "当前玩家:"+suMembers[board.getPlayerNow()].getName(board.getPlayerNow())+
+                                        " 剩余雷数:"+board.getRemain();
+                                mapData.setText(MapData);
+                            }else {
+                                String MapData = "当前玩家:"+suMembers[board.getPlayerNow()].getName(board.getPlayerNow())+
+                                        " 剩余雷数:"+board.getRemain()+
+                                        " 剩余行动数:"+ (moveNum-board.getMove());
+                                mapData.setText(MapData);
+                            }
+                            String memberData = suMembers[board.getPlayerNow()].getName(board.getPlayerNow())+" 得分数:"+board.getPlayers()[board.getPlayerNow()].getScore()+"失误数:"+board.getPlayers()[board.getPlayerNow()].getMiss();
+                            suMembers[board.getPlayerNow()].scoreBoard.setText(memberData);
+                            if(board.isend){
+                                EndFrame frame = new EndFrame();
+                                frame.setVisible(true); 
+                            }                            
                         }
                         if (e.getButton() == MouseEvent.BUTTON3){
                             if (board.getOpenState(finalI,finalJ)==1){
@@ -248,6 +279,8 @@ public class BoardComponent extends JPanel {
                                 }
                             }
                             setMapData();
+                            String memberData = suMembers[board.getPlayerNow()].getName(board.getPlayerNow())+" 得分数:"+board.getPlayers()[board.getPlayerNow()].getScore()+"失误数:"+board.getPlayers()[board.getPlayerNow()].getMiss();
+                            suMembers[board.getPlayerNow()].scoreBoard.setText(memberData);
                         }
 
                         int now = board.getPlayerNow();
@@ -304,6 +337,32 @@ public class BoardComponent extends JPanel {
                 });
             }
         }
+        cheat.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(board.hadinit){
+                    for(int x=1;x<=rows;x++){
+                        for(int y=1;y<=cols;y++){
+                            Image cheatmine = new ImageIcon("src\\view\\pictures\\mineCheat.jpg").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                            ImageIcon cheatmineicon = new ImageIcon(cheatmine);
+                            if(board.getMineState(x, y)==9)buttons[x][y].setIcon(cheatmineicon);
+                        }
+                    }
+                }
+                else{
+                    board.boardInit(1,1);
+                    board.hadinit=true;
+                    for(int x=1;x<=rows;x++){
+                        for(int y=1;y<=cols;y++){
+                            Image cheatmine = new ImageIcon("src\\view\\pictures\\mineCheat.jpg").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                            ImageIcon cheatmineicon = new ImageIcon(cheatmine);
+                            if(board.getMineState(x, y)==9)buttons[x][y].setIcon(cheatmineicon);
+                        }
+                    }
+
+                }
+            }
+        });
     }
 
 
