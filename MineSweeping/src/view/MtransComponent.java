@@ -43,10 +43,10 @@ public class MtransComponent extends JPanel{
         add(rets);
 
         setLayout(null);
-        primary.setBounds(230,350,350,50);
-        advance.setBounds(230,550,350,50);
-        middle.setBounds(230,450,350,50);
-        music.setBounds(758,725,50,50);
+        primary.setBounds(320,350,350,50);
+        advance.setBounds(320,550,350,50);
+        middle.setBounds(320,450,350,50);
+        music.setBounds(930,725,50,50);
 
 
         music.setBorderPainted(false);
