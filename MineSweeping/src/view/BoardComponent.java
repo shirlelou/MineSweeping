@@ -180,6 +180,87 @@ public class BoardComponent extends JPanel {
     }
 
     public void refreshData(){
+        for (int x = 1; x <= board.row; x++) {
+            for (int y = 1; y <= board.row; y++) {
+                if (true) {
+                    if (board.getOpenState(x, y) == 3&&board.getMineState(x, y) == 9) {
+                        Image Mine = new ImageIcon("src\\view\\pictures\\mine.jpg").getImage()
+                                .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                        ImageIcon mine = new ImageIcon(Mine);
+                        buttons[x][y].setIcon(mine);
+                        buttons[x][y].setBorderPainted(false);
+                    } else if (board.getOpenState(x, y) == 3&&board.getMineState(x, y) == 0) {
+                        Image Open = new ImageIcon("src\\view\\pictures\\blankOpen.jpg")
+                                .getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                        ImageIcon open = new ImageIcon(Open);
+                        buttons[x][y].setIcon(open);
+                        buttons[x][y].setBorderPainted(false);
+                    } else if (board.getOpenState(x, y) == 3&&board.getMineState(x, y) == 1) {
+                        Image Open = new ImageIcon("src\\view\\pictures\\1.jpg").getImage()
+                                .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                        ImageIcon open = new ImageIcon(Open);
+                        buttons[x][y].setIcon(open);
+                        buttons[x][y].setBorderPainted(false);
+                    } else if (board.getOpenState(x, y) == 3&&board.getMineState(x, y) == 2) {
+                        Image Open = new ImageIcon("src\\view\\pictures\\2.jpg").getImage()
+                                .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                        ImageIcon open = new ImageIcon(Open);
+                        buttons[x][y].setIcon(open);
+                        buttons[x][y].setBorderPainted(false);
+                    } else if (board.getOpenState(x, y) == 3&&board.getMineState(x, y) == 3) {
+                        Image Open = new ImageIcon("src\\view\\pictures\\3.jpg").getImage()
+                                .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                        ImageIcon open = new ImageIcon(Open);
+                        buttons[x][y].setIcon(open);
+                        buttons[x][y].setBorderPainted(false);
+                    } else if (board.getOpenState(x, y) == 3&&board.getMineState(x, y) == 4) {
+                        Image Open = new ImageIcon("src\\view\\pictures\\4.jpg").getImage()
+                                .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                        ImageIcon open = new ImageIcon(Open);
+                        buttons[x][y].setIcon(open);
+                        buttons[x][y].setBorderPainted(false);
+                    } else if (board.getOpenState(x, y) == 3&&board.getMineState(x, y) == 5) {
+                        Image Open = new ImageIcon("src\\view\\pictures\\5.jpg").getImage()
+                                .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                        ImageIcon open = new ImageIcon(Open);
+                        buttons[x][y].setIcon(open);
+                        buttons[x][y].setBorderPainted(false);
+                    } else if (board.getOpenState(x, y) == 3&&board.getMineState(x, y) == 6) {
+                        Image Open = new ImageIcon("src\\view\\pictures\\6.jpg").getImage()
+                                .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                        ImageIcon open = new ImageIcon(Open);
+                        buttons[x][y].setIcon(open);
+                        buttons[x][y].setBorderPainted(false);
+                    } else if (board.getOpenState(x, y) == 3&&board.getMineState(x, y) == 7) {
+                        Image Open = new ImageIcon("src\\view\\pictures\\7.jpg").getImage()
+                                .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                        ImageIcon open = new ImageIcon(Open);
+                        buttons[x][y].setIcon(open);
+                        buttons[x][y].setBorderPainted(false);
+                    } else if (board.getOpenState(x, y) == 3&&board.getMineState(x, y) == 8) {
+                        Image Open = new ImageIcon("src\\view\\pictures\\8.jpg").getImage()
+                                .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                        ImageIcon open = new ImageIcon(Open);
+                        buttons[x][y].setIcon(open);
+                        buttons[x][y].setBorderPainted(false);
+                    } else if(board.getOpenState(x, y) == 1){
+                        Image Blank = new ImageIcon("src\\view\\pictures\\blankClosed.jpg").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                        ImageIcon blank = new ImageIcon(Blank);
+                        buttons[x][y].setIcon(blank);
+                        buttons[x][y].setBorderPainted(false);
+                    }
+                    else if(board.getOpenState(x, y) == 2&&board.getMineState(x, y) == 9){
+                        Image Flag = new ImageIcon("src\\view\\pictures\\flag.jpg").getImage()
+                                .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                        ImageIcon flag = new ImageIcon(Flag);
+                        buttons[x][y].setIcon(flag);
+                        buttons[x][y].setBorderPainted(false);
+                    }
+                }
+            }
+        }
+
+
         int now = board.getPlayerNow();
         String MapData = "当前玩家:"+suMembers[now].getName(now)+
                 " 剩余雷数:"+board.getRemain()+
