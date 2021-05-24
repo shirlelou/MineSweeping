@@ -354,24 +354,16 @@ public class Board {
         
         //检测是否结束游戏
 
-        if(isEnd()){
-            isend=true;  
-            File out = new File("out\\out.txt");  
-            // 路径为文件且不为空则进行删除  
-            if (out.isFile() && out.exists()) {  
-                out.delete();    
-            }    
-        }
-        
+    }
 
-
+    public void inFile(){
         FileWriter out = null;
         try {
 
 
             File fi;
             String saveFileName = "src/xyz/saving/output.txt";
-            JFileChooser fileChooser = new JFileChooser();
+            JFileChooser fileChooser = new JFileChooser("out\\.");
 
             FileNameExtensionFilter filter = new FileNameExtensionFilter(
                 "游戏存档文件(*.txt)", "txt");
@@ -393,15 +385,15 @@ public class Board {
                 saveFileName = fi.getAbsolutePath() + ".txt";
                 System.out.println("save: " + saveFileName);
             }
-        }
+            }
 
-
-            File file=new File(saveFileName);
-            out = new FileWriter(file);
-            out.write(playerNum+" "+aiNum+" "+moveNum+"\n");
-            out.write(row+" "+col+" "+mineNum+"\n");
-            out.write(playerNow+" "+move+" "+remain+"\n");
-            for(int i=1;i<=playerNum+aiNum;i++){
+            if(saveFileName !=null){
+                File file=new File(saveFileName);
+                out = new FileWriter(file);
+                out.write(playerNum+" "+aiNum+" "+moveNum+"\n");
+                out.write(row+" "+col+" "+mineNum+"\n");
+                out.write(playerNow+" "+move+" "+remain+"\n");
+                for(int i=1;i<=playerNum+aiNum;i++){
                 out.write(players[i].getScore()+" ");
                 out.write(players[i].getMiss()+"");
                 out.write("\n");
@@ -412,13 +404,16 @@ public class Board {
                 }
                 out.write("\n");
             }
+            }
+            
 
 
         } catch (IOException e) {
             e.printStackTrace();
         }finally{
             try {
-                out.close();
+                if(out !=null)out.close();
+                
             } catch (IOException e) {
                 e.printStackTrace();
             }

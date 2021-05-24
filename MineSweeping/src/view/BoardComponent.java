@@ -32,6 +32,7 @@ public class BoardComponent extends JPanel {
     private Number skillNum2 = new Number();
     private Number skillNum3 = new Number();
     private Number skillNum4 = new Number();
+    public JButton infile ;
 
 
     public BoardComponent(){
@@ -83,6 +84,17 @@ public class BoardComponent extends JPanel {
         buttons = gameBoard.getButtons();
 
         board = new Board(rows,cols,playerNum,AINum,mineNum,moveNum);
+
+        infile = new JButton("存档");
+        infile.setBounds(300,725,100,50);
+        add(infile);
+
+        infile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                board.inFile();
+            }
+        });
 
         add(mapData);
         setMapData();
