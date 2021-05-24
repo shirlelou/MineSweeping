@@ -6,6 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -36,7 +40,13 @@ public class BoardComponent extends JPanel {
     public JButton checkfile;
 
 
-    public boolean checkfile(){
+    public boolean checkfil(){
+        JFileChooser chooser = new JFileChooser("out\\.");
+                chooser.showOpenDialog(gameBoard);
+                File file = chooser.getSelectedFile();
+                if(file != null){
+                    return false;
+                } 
         return false;
     }
     
@@ -85,7 +95,7 @@ public class BoardComponent extends JPanel {
         for(int i=1;i<=playerNum+AINum;i++){
             suMembers[i]=new SUMember(i);
             if(i==1){
-                suMembers[i].setBounds(50,9,160,190);
+                suMembers[i].setBounds(50,4,160,190);
                 skillNum1.i=0;
                 suMembers[i].getMemberImage().addActionListener(new ActionListener() {
                     @Override
@@ -123,7 +133,7 @@ public class BoardComponent extends JPanel {
                 });
             }
             if(i==2){
-                suMembers[i].setBounds(50,208,160,190);
+                suMembers[i].setBounds(50,198,160,190);
                 skillNum2.i=0;
                 suMembers[i].getMemberImage().addActionListener(new ActionListener() {
                     @Override
@@ -139,7 +149,7 @@ public class BoardComponent extends JPanel {
                 });
             }
             if(i==3){
-                suMembers[i].setBounds(50,407,160,190);
+                suMembers[i].setBounds(50,392,160,190);
                 skillNum3.i=0;
                 suMembers[i].getMemberImage().addActionListener(new ActionListener() {
                     @Override
@@ -156,7 +166,7 @@ public class BoardComponent extends JPanel {
                 });
             }
             if(i==4){
-                suMembers[i].setBounds(50,606,160,190);
+                suMembers[i].setBounds(50,586,160,190);
                 skillNum4.i=0;
                 suMembers[i].getMemberImage().addActionListener(new ActionListener() {
                     @Override
@@ -186,7 +196,7 @@ public class BoardComponent extends JPanel {
         checkfile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(!checkfile()){
+                if(!checkfil()){
                     JOptionPane.showMessageDialog(gameBoard, "存档不同","提示",JOptionPane.WARNING_MESSAGE,null);
                 }
             }
@@ -591,7 +601,7 @@ public class BoardComponent extends JPanel {
                             }
                             String memberData = suMembers[used].getName(used)+" 得分:"+board.getPlayers()[used].getScore()+"失误:"+board.getPlayers()[used].getMiss();
                             suMembers[used].scoreBoard.setText(memberData);
-                            if(board.isend){
+                            if(board.isEnd()){
                                 int max = board.getPlayers()[1].getScore();
                                 int min = 361;
                                 boolean[] scoreJdg = new boolean[5];
@@ -773,6 +783,62 @@ public class BoardComponent extends JPanel {
                                 ImageIcon picture1 = new ImageIcon(Picture1);
                                 suMembers[now].setMemberImage(picture1);
                             }
+                        }
+                        if(board.isEnd()){
+                            int max = board.getPlayers()[1].getScore();
+                            int min = 361;
+                            boolean[] scoreJdg = new boolean[5];
+                            boolean[] missJdg = new boolean[5];
+                            ArrayList<String> nameList = new ArrayList<>();
+                            for (int m = 0; m < 5; m++) {
+                                scoreJdg[m]=false;
+                                missJdg[m]=false;
+                            }
+                            for(int i=1;i<=playerNum+AINum-1;i++){
+                                if(board.getPlayers()[i+1].getScore()>=board.getPlayers()[i].getScore()){
+                                    max=board.getPlayers()[i+1].getScore();
+                                }
+                            }
+                            for (int k = 1; k <= playerNum+AINum; k++) {
+                                if (max==board.getPlayers()[k].getScore()){
+                                    scoreJdg[k]=true;
+                                }
+                            }
+                            for (int j = 1; j <= playerNum+AINum ; j++) {
+                                if (scoreJdg[j]){
+                                    if (board.getPlayers()[j].getMiss()<=min){
+                                        min=board.getPlayers()[j].getMiss();
+                                    }
+                                }
+                            }
+                            for (int p = 1; p <= playerNum+AINum; p++) {
+                                if (scoreJdg[p]&&min==board.getPlayers()[p].getMiss()){
+                                    missJdg[p]=true;
+                                }
+                            }
+                            for (int n = 1; n <= playerNum+AINum; n++) {
+                                if (scoreJdg[n]&&missJdg[n]){
+                                    nameList.add(suMembers[n].getName(n));
+                                }
+                            }
+                            String winMessage = "";
+                            if (nameList.size()==1){
+                                winMessage=String.format("%s 获胜",nameList.get(0));
+                            }else {
+                                int numSUM = nameList.size();
+                                if (numSUM==2){
+                                    winMessage=String.format("%s,%s 平局",
+                                            nameList.get(0),nameList.get(1));
+                                }else if (numSUM==3){
+                                    winMessage=String.format("%s,%s,%s 平局",
+                                            nameList.get(0),nameList.get(1),nameList.get(2));
+                                }else if (numSUM==4){
+                                    winMessage=String.format("%s,%s,%s,%s 平局",
+                                            nameList.get(0),nameList.get(1),nameList.get(2),nameList.get(3));
+                                }
+                            }
+
+                            JOptionPane.showMessageDialog(gameBoard, winMessage, "游戏结束", JOptionPane.INFORMATION_MESSAGE, null);
                         }
                     }
                 });

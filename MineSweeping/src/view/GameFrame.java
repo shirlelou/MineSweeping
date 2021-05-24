@@ -63,8 +63,10 @@ public class GameFrame extends JFrame{
                 if (file == null) {
                     JOptionPane.showMessageDialog(start, "未得到存档文件", "提示", JOptionPane.WARNING_MESSAGE, null);
                 }else{
+                    n.i++;
                     FileReader reader = null;
                     try {
+
                         reader = new FileReader(file);
                         BufferedReader br = new BufferedReader(reader);
                         
@@ -128,7 +130,7 @@ public class GameFrame extends JFrame{
                             e2.printStackTrace();
                         }
 
-
+                        boardcom[n.i].board.hadinit=true;
                         try {
                             for(int i=1;i<=boardcom[n.i].board.getPlayerNum()+boardcom[n.i].board.getAiNum();i++){
                                 nextline = br.readLine();
@@ -183,7 +185,7 @@ public class GameFrame extends JFrame{
                     }
                     boardcom[n.i].refreshData();
                     setContentPane(boardcom[n.i]);
-                    n.i++;
+                    
                 } 
             }
         });
