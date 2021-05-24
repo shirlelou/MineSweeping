@@ -363,6 +363,16 @@ public class GameFrame extends JFrame{
                 n.i++;
             }
         });
+        dItransComponent.comfirm.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                boardcom[n.i].setSuMembers(4, 0, 5);
+                boardcom[n.i].setBoard(16 , 30, 99);
+                setContentPane(boardcom[n.i]);
+                n.i++;
+            }
+        });
 
         
 
