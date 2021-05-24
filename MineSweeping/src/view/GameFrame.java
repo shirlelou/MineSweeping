@@ -126,7 +126,7 @@ public class GameFrame extends JFrame{
                             e2.printStackTrace();
                         }
 
-/*
+
                         try {
                             nextline = br.readLine();
                             int[] a = new int[40];
@@ -140,31 +140,32 @@ public class GameFrame extends JFrame{
                             for(int i=1;i<=boardcom[n.i].board.getPlayerNum()+boardcom[n.i].board.getAiNum();i++){
                                 boardcom[n.i].board.getPlayers()[i].setScore(score);
                                 boardcom[n.i].board.getPlayers()[i].setMiss(miss);
-                            }
-                                    
-                                
+                            } 
                         } catch (IOException e2) {
                             e2.printStackTrace();
-                        }*/
-/*
+                        }
+
                         int tmp = 1;
                         try {
                             while(br.readLine()!=null){
                                 nextline = br.readLine();
                                 int[] a = new int[40];
                                 String[] b = new String[40];
-                                b = nextline.split(" ");
-                                for(int i=0;i<b.length;i++){
-                                    a[i] = Integer.parseInt(b[i]);
+                                if(nextline != null){
+                                    b = nextline.split(" ");
+                                    for(int i=0;i<b.length;i++){
+                                        a[i] = Integer.parseInt(b[i]);
+                                    }
+                                    for(int y=1;y<=boardcom[n.i].board.row;y++){
+                                        
+                                            boardcom[n.i].board.gridInfo[tmp][y]=a[y];
+                                        
+                                    }
+                                    tmp++;
+                                    if(tmp>boardcom[n.i].board.row)break;
+                                
                                 }
-                                for(int y=1;y<=boardcom[n.i].board.row;y++){
-                                    
-                                        boardcom[n.i].board.gridInfo[tmp][y]=a[y];
-                                    
-                                }
-                                tmp++;
-                                if(tmp>boardcom[n.i].board.row)break;
-                            }
+                            } 
                             
                             
                         } catch (NumberFormatException e1) {
@@ -172,7 +173,87 @@ public class GameFrame extends JFrame{
                         } catch (IOException e1) {
                             // TODO Auto-generated catch block
                             e1.printStackTrace();
-                        }*/
+                        }
+                        for (int x = 1; x <= boardcom[n.i].board.row; x++) {
+                            for (int y = 1; y <= boardcom[n.i].board.row; y++) {
+                                if (true) {
+                                    if (boardcom[n.i].board.getOpenState(x, y) == 3&&boardcom[n.i].board.getMineState(x, y) == 9) {
+                                        Image Mine = new ImageIcon("src\\view\\pictures\\mine.jpg").getImage()
+                                                .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                                        ImageIcon mine = new ImageIcon(Mine);
+                                        boardcom[n.i].buttons[x][y].setIcon(mine);
+                                        boardcom[n.i].buttons[x][y].setBorderPainted(false);
+                                    } else if (boardcom[n.i].board.getOpenState(x, y) == 3&&boardcom[n.i].board.getMineState(x, y) == 0) {
+                                        Image Open = new ImageIcon("src\\view\\pictures\\blankOpen.jpg")
+                                                .getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                                        ImageIcon open = new ImageIcon(Open);
+                                        boardcom[n.i].buttons[x][y].setIcon(open);
+                                        boardcom[n.i].buttons[x][y].setBorderPainted(false);
+                                    } else if (boardcom[n.i].board.getOpenState(x, y) == 3&&boardcom[n.i].board.getMineState(x, y) == 1) {
+                                        Image Open = new ImageIcon("src\\view\\pictures\\1.jpg").getImage()
+                                                .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                                        ImageIcon open = new ImageIcon(Open);
+                                        boardcom[n.i].buttons[x][y].setIcon(open);
+                                        boardcom[n.i].buttons[x][y].setBorderPainted(false);
+                                    } else if (boardcom[n.i].board.getOpenState(x, y) == 3&&boardcom[n.i].board.getMineState(x, y) == 2) {
+                                        Image Open = new ImageIcon("src\\view\\pictures\\2.jpg").getImage()
+                                                .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                                        ImageIcon open = new ImageIcon(Open);
+                                        boardcom[n.i].buttons[x][y].setIcon(open);
+                                        boardcom[n.i].buttons[x][y].setBorderPainted(false);
+                                    } else if (boardcom[n.i].board.getOpenState(x, y) == 3&&boardcom[n.i].board.getMineState(x, y) == 3) {
+                                        Image Open = new ImageIcon("src\\view\\pictures\\3.jpg").getImage()
+                                                .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                                        ImageIcon open = new ImageIcon(Open);
+                                        boardcom[n.i].buttons[x][y].setIcon(open);
+                                        boardcom[n.i].buttons[x][y].setBorderPainted(false);
+                                    } else if (boardcom[n.i].board.getOpenState(x, y) == 3&&boardcom[n.i].board.getMineState(x, y) == 4) {
+                                        Image Open = new ImageIcon("src\\view\\pictures\\4.jpg").getImage()
+                                                .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                                        ImageIcon open = new ImageIcon(Open);
+                                        boardcom[n.i].buttons[x][y].setIcon(open);
+                                        boardcom[n.i].buttons[x][y].setBorderPainted(false);
+                                    } else if (boardcom[n.i].board.getOpenState(x, y) == 3&&boardcom[n.i].board.getMineState(x, y) == 5) {
+                                        Image Open = new ImageIcon("src\\view\\pictures\\5.jpg").getImage()
+                                                .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                                        ImageIcon open = new ImageIcon(Open);
+                                        boardcom[n.i].buttons[x][y].setIcon(open);
+                                        boardcom[n.i].buttons[x][y].setBorderPainted(false);
+                                    } else if (boardcom[n.i].board.getOpenState(x, y) == 3&&boardcom[n.i].board.getMineState(x, y) == 6) {
+                                        Image Open = new ImageIcon("src\\view\\pictures\\6.jpg").getImage()
+                                                .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                                        ImageIcon open = new ImageIcon(Open);
+                                        boardcom[n.i].buttons[x][y].setIcon(open);
+                                        boardcom[n.i].buttons[x][y].setBorderPainted(false);
+                                    } else if (boardcom[n.i].board.getOpenState(x, y) == 3&&boardcom[n.i].board.getMineState(x, y) == 7) {
+                                        Image Open = new ImageIcon("src\\view\\pictures\\7.jpg").getImage()
+                                                .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                                        ImageIcon open = new ImageIcon(Open);
+                                        boardcom[n.i].buttons[x][y].setIcon(open);
+                                        boardcom[n.i].buttons[x][y].setBorderPainted(false);
+                                    } else if (boardcom[n.i].board.getOpenState(x, y) == 3&&boardcom[n.i].board.getMineState(x, y) == 8) {
+                                        Image Open = new ImageIcon("src\\view\\pictures\\8.jpg").getImage()
+                                                .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                                        ImageIcon open = new ImageIcon(Open);
+                                        boardcom[n.i].buttons[x][y].setIcon(open);
+                                        boardcom[n.i].buttons[x][y].setBorderPainted(false);
+                                    } else if(boardcom[n.i].board.getOpenState(x, y) == 1){
+                                        Image Blank = new ImageIcon("src\\view\\pictures\\blankClosed.jpg").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                                        ImageIcon blank = new ImageIcon(Blank);
+                                        boardcom[n.i].buttons[x][y].setIcon(blank);
+                                        boardcom[n.i].buttons[x][y].setBorderPainted(false);
+                                    }
+                                    else if(boardcom[n.i].board.getOpenState(x, y) == 1&&boardcom[n.i].board.getMineState(x, y) == 9){
+                                        Image Flag = new ImageIcon("src\\view\\pictures\\flag.jpg").getImage()
+                                                        .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                                                ImageIcon flag = new ImageIcon(Flag);
+                                        boardcom[n.i].buttons[x][y].setIcon(flag);
+                                        boardcom[n.i].buttons[x][y].setBorderPainted(false);
+                                    }
+                                
+                                }
+                            }
+                        }
                     } catch (FileNotFoundException e1) {
                         e1.printStackTrace();
                     }finally{

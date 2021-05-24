@@ -456,4 +456,3 @@ public class BoardComponent extends JPanel {
 
 
 }
-
