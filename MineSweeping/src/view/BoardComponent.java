@@ -32,8 +32,14 @@ public class BoardComponent extends JPanel {
     private Number skillNum2 = new Number();
     private Number skillNum3 = new Number();
     private Number skillNum4 = new Number();
+    public JButton infile ;
+    public JButton checkfile;
 
 
+    public boolean checkfile(){
+        return false;
+    }
+    
     public BoardComponent(){
         setLayout(null);
         setSize(990,805);
@@ -58,22 +64,7 @@ public class BoardComponent extends JPanel {
         this.playerNum=playerNum;
         this.moveNum=moveNum;
         AINum=aiNum;
-        for(int i=1;i<=playerNum+AINum;i++){
-            suMembers[i]=new SUMember(i);
-            if(i==1){
-                suMembers[i].setBounds(50,9,160,190);
-            }
-            if(i==2){
-                suMembers[i].setBounds(50,208,160,190);
-            }
-            if(i==3){
-                suMembers[i].setBounds(50,407,160,190);
-            }
-            if(i==4){
-                suMembers[i].setBounds(50,606,160,190);
-            }
-            add(suMembers[i]);
-        }
+        
     }
     public void setBoard(int rows,int cols,int mineNum){
         this.rows = rows;
@@ -84,6 +75,123 @@ public class BoardComponent extends JPanel {
 
         board = new Board(rows,cols,playerNum,AINum,mineNum,moveNum);
 
+        infile = new JButton("存档");
+        infile.setBounds(300,725,100,50);
+        add(infile);
+        checkfile = new JButton("检查存档");
+        checkfile.setBounds(450,725,100,50);
+        add(checkfile);
+
+        for(int i=1;i<=playerNum+AINum;i++){
+            suMembers[i]=new SUMember(i);
+            if(i==1){
+                suMembers[i].setBounds(50,9,160,190);
+                skillNum1.i=0;
+                suMembers[i].getMemberImage().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (skillNum1.i==0){
+                            for (int x = 1; x <= board.row; x++) {
+                                boolean jdg = false;
+                                for (int y = 1; y <= board.row; y++) {
+                                    if (board.getOpenState(x, y) == 1&&board.getMineState(x, y) == 9) {
+                                        Image Flag = new ImageIcon("src\\view\\pictures\\flag.jpg").getImage()
+                                                .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                                        ImageIcon flag = new ImageIcon(Flag);
+                                        buttons[x][y].setIcon(flag);
+                                        
+                                        board.gridInfo[x][y]=92;
+                                        board.getPlayers()[1].setScore(board.getPlayers()[1].getScore()+1);
+                                        board.setRemain(board.getRemain()-1);
+                                        refreshData();
+                                        jdg=true;
+                                    }
+                                    if (jdg){
+                                        break;
+                                    }
+                                }
+                                if (jdg){
+                                    skillNum1.i++;
+                                    break;
+                                }
+                            }
+                        }
+                        String message = String.format("%s 释放了技能！", suMembers[1].getName(1));
+                        JOptionPane.showMessageDialog(gameBoard,message,"提示",JOptionPane.INFORMATION_MESSAGE,null);
+
+                    }
+                });
+            }
+            if(i==2){
+                suMembers[i].setBounds(50,208,160,190);
+                skillNum2.i=0;
+                suMembers[i].getMemberImage().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (skillNum2.i==0){
+                            board.setMove(board.getMove()-2);
+                            refreshData();
+                            skillNum2.i++;
+                        }
+                        String message = String.format("%s 释放了技能！", suMembers[2].getName(2));
+                        JOptionPane.showMessageDialog(gameBoard,message,"提示",JOptionPane.INFORMATION_MESSAGE,null);
+                    }
+                });
+            }
+            if(i==3){
+                suMembers[i].setBounds(50,407,160,190);
+                skillNum3.i=0;
+                suMembers[i].getMemberImage().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (skillNum3.i==0){
+                            board.getPlayers()[3].setScore(board.getPlayers()[3].getScore()+2);
+                            board.getPlayers()[3].setMiss(board.getPlayers()[3].getMiss()+5);
+                            refreshData();
+                            skillNum3.i++;
+                        }
+                        String message = String.format("%s 释放了技能！", suMembers[3].getName(3));
+                        JOptionPane.showMessageDialog(gameBoard,message,"提示",JOptionPane.INFORMATION_MESSAGE,null);
+                    }
+                });
+            }
+            if(i==4){
+                suMembers[i].setBounds(50,606,160,190);
+                skillNum4.i=0;
+                suMembers[i].getMemberImage().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (skillNum4.i==0){
+                            board.setPlayerNow(4);
+                            board.setMove(moveNum-1);
+                            refreshData();
+                            skillNum4.i++;
+                        }
+                        String message = String.format("%s 释放了技能！", suMembers[4].getName(4));
+                        JOptionPane.showMessageDialog(gameBoard,message,"提示",JOptionPane.INFORMATION_MESSAGE,null);
+                    }
+                });
+            }
+            add(suMembers[i]);
+        }
+
+        infile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                board.inFile();
+            }
+        });
+        
+        
+        checkfile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(!checkfile()){
+                    JOptionPane.showMessageDialog(gameBoard, "存档不同","提示",JOptionPane.WARNING_MESSAGE,null);
+                }
+            }
+        });
+
         add(mapData);
         setMapData();
 
@@ -91,6 +199,7 @@ public class BoardComponent extends JPanel {
         initButtonClick();
         gameBoard.setButtons(buttons);
         add(gameBoard);
+        
 
     }
 
@@ -133,7 +242,7 @@ public class BoardComponent extends JPanel {
         for(int i=1;i<=playerNum+AINum;i++){
             suMembers[i]=new SUMember(i);
             if(i==1){
-                suMembers[i].setBounds(50,9,160,190);
+                suMembers[i].setBounds(50,4,160,190);
                 skillNum1.i=0;
                 suMembers[i].getMemberImage().addActionListener(new ActionListener() {
                     @Override
@@ -147,7 +256,7 @@ public class BoardComponent extends JPanel {
                                                 .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
                                         ImageIcon flag = new ImageIcon(Flag);
                                         buttons[x][y].setIcon(flag);
-                                        buttons[x][y].setBorderPainted(false);
+                                        
                                         board.gridInfo[x][y]=92;
                                         board.getPlayers()[1].setScore(board.getPlayers()[1].getScore()+1);
                                         board.setRemain(board.getRemain()-1);
@@ -169,7 +278,7 @@ public class BoardComponent extends JPanel {
                 });
             }
             if(i==2){
-                suMembers[i].setBounds(50,208,160,190);
+                suMembers[i].setBounds(50,194,160,190);
                 skillNum2.i=0;
                 suMembers[i].getMemberImage().addActionListener(new ActionListener() {
                     @Override
@@ -183,7 +292,7 @@ public class BoardComponent extends JPanel {
                 });
             }
             if(i==3){
-                suMembers[i].setBounds(50,407,160,190);
+                suMembers[i].setBounds(50,384,160,190);
                 skillNum3.i=0;
                 suMembers[i].getMemberImage().addActionListener(new ActionListener() {
                     @Override
@@ -198,7 +307,7 @@ public class BoardComponent extends JPanel {
                 });
             }
             if(i==4){
-                suMembers[i].setBounds(50,606,160,190);
+                suMembers[i].setBounds(50,574,160,190);
                 skillNum4.i=0;
                 suMembers[i].getMemberImage().addActionListener(new ActionListener() {
                     @Override
@@ -234,14 +343,14 @@ public class BoardComponent extends JPanel {
 
     public void setMapData(){
         if (playerNum+AINum==1){
-            mapData.setBounds(300,50,500,50);
+            mapData.setBounds(400,50,500,50);
             Font font = new Font("黑体",Font.BOLD,20);
             mapData.setFont(font);
             String MapData = "当前玩家:"+suMembers[board.getPlayerNow()].getName(board.getPlayerNow())+
                     " 剩余雷数:"+board.getRemain();
             mapData.setText(MapData);
         }else {
-            mapData.setBounds(300,50,500,50);
+            mapData.setBounds(400,50,500,50);
             Font font = new Font("黑体",Font.BOLD,20);
             mapData.setFont(font);
             String MapData = "当前玩家:"+suMembers[board.getPlayerNow()].getName(board.getPlayerNow())+
@@ -260,73 +369,73 @@ public class BoardComponent extends JPanel {
                                 .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
                         ImageIcon mine = new ImageIcon(Mine);
                         buttons[x][y].setIcon(mine);
-                        buttons[x][y].setBorderPainted(false);
+                        
                     } else if (board.getOpenState(x, y) == 3&&board.getMineState(x, y) == 0) {
                         Image Open = new ImageIcon("src\\view\\pictures\\blankOpen.jpg")
                                 .getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
                         ImageIcon open = new ImageIcon(Open);
                         buttons[x][y].setIcon(open);
-                        buttons[x][y].setBorderPainted(false);
+                        
                     } else if (board.getOpenState(x, y) == 3&&board.getMineState(x, y) == 1) {
                         Image Open = new ImageIcon("src\\view\\pictures\\1.jpg").getImage()
                                 .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
                         ImageIcon open = new ImageIcon(Open);
                         buttons[x][y].setIcon(open);
-                        buttons[x][y].setBorderPainted(false);
+                        
                     } else if (board.getOpenState(x, y) == 3&&board.getMineState(x, y) == 2) {
                         Image Open = new ImageIcon("src\\view\\pictures\\2.jpg").getImage()
                                 .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
                         ImageIcon open = new ImageIcon(Open);
                         buttons[x][y].setIcon(open);
-                        buttons[x][y].setBorderPainted(false);
+                        
                     } else if (board.getOpenState(x, y) == 3&&board.getMineState(x, y) == 3) {
                         Image Open = new ImageIcon("src\\view\\pictures\\3.jpg").getImage()
                                 .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
                         ImageIcon open = new ImageIcon(Open);
                         buttons[x][y].setIcon(open);
-                        buttons[x][y].setBorderPainted(false);
+                        
                     } else if (board.getOpenState(x, y) == 3&&board.getMineState(x, y) == 4) {
                         Image Open = new ImageIcon("src\\view\\pictures\\4.jpg").getImage()
                                 .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
                         ImageIcon open = new ImageIcon(Open);
                         buttons[x][y].setIcon(open);
-                        buttons[x][y].setBorderPainted(false);
+                        
                     } else if (board.getOpenState(x, y) == 3&&board.getMineState(x, y) == 5) {
                         Image Open = new ImageIcon("src\\view\\pictures\\5.jpg").getImage()
                                 .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
                         ImageIcon open = new ImageIcon(Open);
                         buttons[x][y].setIcon(open);
-                        buttons[x][y].setBorderPainted(false);
+                        
                     } else if (board.getOpenState(x, y) == 3&&board.getMineState(x, y) == 6) {
                         Image Open = new ImageIcon("src\\view\\pictures\\6.jpg").getImage()
                                 .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
                         ImageIcon open = new ImageIcon(Open);
                         buttons[x][y].setIcon(open);
-                        buttons[x][y].setBorderPainted(false);
+                        
                     } else if (board.getOpenState(x, y) == 3&&board.getMineState(x, y) == 7) {
                         Image Open = new ImageIcon("src\\view\\pictures\\7.jpg").getImage()
                                 .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
                         ImageIcon open = new ImageIcon(Open);
                         buttons[x][y].setIcon(open);
-                        buttons[x][y].setBorderPainted(false);
+                        
                     } else if (board.getOpenState(x, y) == 3&&board.getMineState(x, y) == 8) {
                         Image Open = new ImageIcon("src\\view\\pictures\\8.jpg").getImage()
                                 .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
                         ImageIcon open = new ImageIcon(Open);
                         buttons[x][y].setIcon(open);
-                        buttons[x][y].setBorderPainted(false);
+                        
                     } else if(board.getOpenState(x, y) == 1){
                         Image Blank = new ImageIcon("src\\view\\pictures\\blankClosed.jpg").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
                         ImageIcon blank = new ImageIcon(Blank);
                         buttons[x][y].setIcon(blank);
-                        buttons[x][y].setBorderPainted(false);
+                        
                     }
                     else if(board.getOpenState(x, y) == 2&&board.getMineState(x, y) == 9){
                         Image Flag = new ImageIcon("src\\view\\pictures\\flag.jpg").getImage()
                                 .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
                         ImageIcon flag = new ImageIcon(Flag);
                         buttons[x][y].setIcon(flag);
-                        buttons[x][y].setBorderPainted(false);
+                        
                     }
                 }
             }
@@ -418,53 +527,53 @@ public class BoardComponent extends JPanel {
                                                 Image Mine = new ImageIcon("src\\view\\pictures\\mine.jpg").getImage().getScaledInstance(25,25,Image.SCALE_DEFAULT);
                                                 ImageIcon mine = new ImageIcon(Mine);
                                                 buttons[x][y].setIcon(mine);
-                                                buttons[x][y].setBorderPainted(false);
+                                                
                                             }
                                             else if(board.getMineState(x,y)==0){
                                                 Image Open = new ImageIcon("src\\view\\pictures\\blankOpen.jpg").getImage().getScaledInstance(25,25,Image.SCALE_DEFAULT);
                                                 ImageIcon open = new ImageIcon(Open);
                                                 buttons[x][y].setIcon(open);
-                                                buttons[x][y].setBorderPainted(false);
+                                                
                                             }else if(board.getMineState(x,y)==1){
                                                 Image Open = new ImageIcon("src\\view\\pictures\\1.jpg").getImage().getScaledInstance(25,25,Image.SCALE_DEFAULT);
                                                 ImageIcon open = new ImageIcon(Open);
                                                 buttons[x][y].setIcon(open);
-                                                buttons[x][y].setBorderPainted(false);
+                                                
                                             }else if(board.getMineState(x,y)==2){
                                                 Image Open = new ImageIcon("src\\view\\pictures\\2.jpg").getImage().getScaledInstance(25,25,Image.SCALE_DEFAULT);
                                                 ImageIcon open = new ImageIcon(Open);
                                                 buttons[x][y].setIcon(open);
-                                                buttons[x][y].setBorderPainted(false);
+                                                
                                             }else if(board.getMineState(x,y)==3){
                                                 Image Open = new ImageIcon("src\\view\\pictures\\3.jpg").getImage().getScaledInstance(25,25,Image.SCALE_DEFAULT);
                                                 ImageIcon open = new ImageIcon(Open);
                                                 buttons[x][y].setIcon(open);
-                                                buttons[x][y].setBorderPainted(false);
+                                                
                                             }else if(board.getMineState(x,y)==4){
                                                 Image Open = new ImageIcon("src\\view\\pictures\\4.jpg").getImage().getScaledInstance(25,25,Image.SCALE_DEFAULT);
                                                 ImageIcon open = new ImageIcon(Open);
                                                 buttons[x][y].setIcon(open);
-                                                buttons[x][y].setBorderPainted(false);
+                                                
                                             }else if(board.getMineState(x,y)==5){
                                                 Image Open = new ImageIcon("src\\view\\pictures\\5.jpg").getImage().getScaledInstance(25,25,Image.SCALE_DEFAULT);
                                                 ImageIcon open = new ImageIcon(Open);
                                                 buttons[x][y].setIcon(open);
-                                                buttons[x][y].setBorderPainted(false);
+                                                
                                             }else if(board.getMineState(x,y)==6){
                                                 Image Open = new ImageIcon("src\\view\\pictures\\6.jpg").getImage().getScaledInstance(25,25,Image.SCALE_DEFAULT);
                                                 ImageIcon open = new ImageIcon(Open);
                                                 buttons[x][y].setIcon(open);
-                                                buttons[x][y].setBorderPainted(false);
+                                                
                                             }else if(board.getMineState(x,y)==7){
                                                 Image Open = new ImageIcon("src\\view\\pictures\\7.jpg").getImage().getScaledInstance(25,25,Image.SCALE_DEFAULT);
                                                 ImageIcon open = new ImageIcon(Open);
                                                 buttons[x][y].setIcon(open);
-                                                buttons[x][y].setBorderPainted(false);
+                                                
                                             }else if(board.getMineState(x,y)==8){
                                                 Image Open = new ImageIcon("src\\view\\pictures\\8.jpg").getImage().getScaledInstance(25,25,Image.SCALE_DEFAULT);
                                                 ImageIcon open = new ImageIcon(Open);
                                                 buttons[x][y].setIcon(open);
-                                                buttons[x][y].setBorderPainted(false);
+                                                
                                             }
                                         }
                                     }
@@ -550,52 +659,52 @@ public class BoardComponent extends JPanel {
                                                 Image Flag = new ImageIcon("src\\view\\pictures\\flag.jpg").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
                                                 ImageIcon flag = new ImageIcon(Flag);
                                                 buttons[x][y].setIcon(flag);
-                                                buttons[x][y].setBorderPainted(false);
+                                                
                                             } else if (board.getMineState(x, y) == 0) {
                                                 Image Open = new ImageIcon("src\\view\\pictures\\blankOpen.jpg").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
                                                 ImageIcon open = new ImageIcon(Open);
                                                 buttons[x][y].setIcon(open);
-                                                buttons[x][y].setBorderPainted(false);
+                                                
                                             } else if (board.getMineState(x, y) == 1) {
                                                 Image Open = new ImageIcon("src\\view\\pictures\\1.jpg").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
                                                 ImageIcon open = new ImageIcon(Open);
                                                 buttons[x][y].setIcon(open);
-                                                buttons[x][y].setBorderPainted(false);
+                                                
                                             } else if (board.getMineState(x, y) == 2) {
                                                 Image Open = new ImageIcon("src\\view\\pictures\\2.jpg").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
                                                 ImageIcon open = new ImageIcon(Open);
                                                 buttons[x][y].setIcon(open);
-                                                buttons[x][y].setBorderPainted(false);
+                                                
                                             } else if (board.getMineState(x, y) == 3) {
                                                 Image Open = new ImageIcon("src\\view\\pictures\\3.jpg").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
                                                 ImageIcon open = new ImageIcon(Open);
                                                 buttons[x][y].setIcon(open);
-                                                buttons[x][y].setBorderPainted(false);
+                                                
                                             } else if (board.getMineState(x, y) == 4) {
                                                 Image Open = new ImageIcon("src\\view\\pictures\\4.jpg").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
                                                 ImageIcon open = new ImageIcon(Open);
                                                 buttons[x][y].setIcon(open);
-                                                buttons[x][y].setBorderPainted(false);
+                                                
                                             } else if (board.getMineState(x, y) == 5) {
                                                 Image Open = new ImageIcon("src\\view\\pictures\\5.jpg").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
                                                 ImageIcon open = new ImageIcon(Open);
                                                 buttons[x][y].setIcon(open);
-                                                buttons[x][y].setBorderPainted(false);
+                                                
                                             } else if (board.getMineState(x, y) == 6) {
                                                 Image Open = new ImageIcon("src\\view\\pictures\\6.jpg").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
                                                 ImageIcon open = new ImageIcon(Open);
                                                 buttons[x][y].setIcon(open);
-                                                buttons[x][y].setBorderPainted(false);
+                                                
                                             } else if (board.getMineState(x, y) == 7) {
                                                 Image Open = new ImageIcon("src\\view\\pictures\\7.jpg").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
                                                 ImageIcon open = new ImageIcon(Open);
                                                 buttons[x][y].setIcon(open);
-                                                buttons[x][y].setBorderPainted(false);
+                                                
                                             } else if (board.getMineState(x, y) == 8) {
                                                 Image Open = new ImageIcon("src\\view\\pictures\\8.jpg").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
                                                 ImageIcon open = new ImageIcon(Open);
                                                 buttons[x][y].setIcon(open);
-                                                buttons[x][y].setBorderPainted(false);
+                                                
                                             }
                                         }
                                     }

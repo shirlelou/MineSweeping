@@ -354,24 +354,16 @@ public class Board {
         
         //检测是否结束游戏
 
-        if(isEnd()){
-            isend=true;  
-            File out = new File("out\\out.txt");  
-            // 路径为文件且不为空则进行删除  
-            if (out.isFile() && out.exists()) {  
-                out.delete();    
-            }    
-        }
-        
+    }
 
-
+    public void inFile(){
         FileWriter out = null;
         try {
 
 
             File fi;
             String saveFileName = "src/xyz/saving/output.txt";
-            JFileChooser fileChooser = new JFileChooser();
+            JFileChooser fileChooser = new JFileChooser("out\\.");
 
             FileNameExtensionFilter filter = new FileNameExtensionFilter(
                 "游戏存档文件(*.txt)", "txt");
@@ -393,15 +385,15 @@ public class Board {
                 saveFileName = fi.getAbsolutePath() + ".txt";
                 System.out.println("save: " + saveFileName);
             }
-        }
+            }
 
-
-            File file=new File(saveFileName);
-            out = new FileWriter(file);
-            out.write(playerNum+" "+aiNum+" "+moveNum+"\n");
-            out.write(row+" "+col+" "+mineNum+"\n");
-            out.write(playerNow+" "+move+" "+remain+"\n");
-            for(int i=1;i<=playerNum+aiNum;i++){
+            if(saveFileName !=null){
+                File file=new File(saveFileName);
+                out = new FileWriter(file);
+                out.write(playerNum+" "+aiNum+" "+moveNum+"\n");
+                out.write(row+" "+col+" "+mineNum+"\n");
+                out.write(playerNow+" "+move+" "+remain+"\n");
+                for(int i=1;i<=playerNum+aiNum;i++){
                 out.write(players[i].getScore()+" ");
                 out.write(players[i].getMiss()+"");
                 out.write("\n");
@@ -412,13 +404,16 @@ public class Board {
                 }
                 out.write("\n");
             }
+            }
+            
 
 
         } catch (IOException e) {
             e.printStackTrace();
         }finally{
             try {
-                out.close();
+                if(out !=null)out.close();
+                
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -426,5 +421,137 @@ public class Board {
 
     }
 
+ /* public boolean checkfile(){
+        JFileChooser chooser = new JFileChooser("out\\.");
+                chooser.showOpenDialog(gameboard);
+                File file = chooser.getSelectedFile();
+                if (file == null) {
+                    JOptionPane.showMessageDialog(start, "未得到存档文件", "提示", JOptionPane.WARNING_MESSAGE, null);
+                }else{
+                    FileReader reader = null;
+                    try {
+                        reader = new FileReader(file);
+                        BufferedReader br = new BufferedReader(reader);
+                        
+                        String nextline;
+                        
+                        try {
+                            nextline = br.readLine();
+                            int[] a = new int[40];
+                            String[] b = new String[40];
+                            b = nextline.split(" ");
+                            for(int i=0;i<b.length;i++){
+                                a[i] = Integer.parseInt(b[i]);
+                            }
+                                
+                            int playerNum = a[0];
+                            int aiNum = a[1];
+                            int moveNum = a[2];
+                            boardcom[n.i].setSuMembers(playerNum, aiNum, moveNum);
+                                    
+                                
+                        } catch (IOException e2) {
+                            e2.printStackTrace();
+                        }
+                        try {
+                            nextline = br.readLine();
+                            int[] a = new int[40];
+                            String[] b = new String[40];
+                            b = nextline.split(" ");
+                            for(int i=0;i<b.length;i++){
+                                a[i] = Integer.parseInt(b[i]);
+                            }
+                                
+                            int row = a[0];
+                            int col = a[1];
+                            int mineNum = a[2];
+                            boardcom[n.i].setBoard(row , col, mineNum);
+                                    
+                                
+                        } catch (IOException e2) {
+                            e2.printStackTrace();
+                        }
+
+                        try {
+                            nextline = br.readLine();
+                            int[] a = new int[40];
+                            String[] b = new String[40];
+                            b = nextline.split(" ");
+                            for(int i=0;i<b.length;i++){
+                                a[i] = Integer.parseInt(b[i]);
+                            }
+                                
+                            int playerNow = a[0];
+                            int move = a[1];
+                            int remain = a[2];
+                            boardcom[n.i].board.setMove(move);
+                            boardcom[n.i].board.setPlayerNow(playerNow);
+                            boardcom[n.i].board.setRemain(remain);
+                                    
+                                
+                        } catch (IOException e2) {
+                            e2.printStackTrace();
+                        }
+
+
+                        try {
+                            for(int i=1;i<=boardcom[n.i].board.getPlayerNum()+boardcom[n.i].board.getAiNum();i++){
+                                nextline = br.readLine();
+                                int[] a = new int[40];
+                                String[] b = new String[40];
+                                b = nextline.split(" ");
+                                for(int j=0;j<b.length;j++){
+                                    a[j] = Integer.parseInt(b[j]);
+                                }
+                                int score = a[0];
+                                int miss = a[1];   
+                            
+                                boardcom[n.i].board.getPlayers()[i].setScore(score);
+                                boardcom[n.i].board.getPlayers()[i].setMiss(miss);
+                            } 
+                        } catch (IOException e2) {
+                            e2.printStackTrace();
+                        }
+
+                        
+                        try {
+                            for(int x=1;x<=boardcom[n.i].board.row;x++){
+                                nextline = br.readLine();
+                                int[] a = new int[40];
+                                String[] b = new String[40];
+                                b = nextline.split(" ");
+                                for(int i=0;i<b.length;i++){
+                                    if(b[i]==null)break;
+                                    a[i] = Integer.parseInt(b[i]);
+                                }
+                                for(int y=1;y<=boardcom[n.i].board.col;y++){
+                                    boardcom[n.i].board.gridInfo[x][y]=a[y-1];
+                                }
+                                
+                            } 
+                            
+                            
+                        } catch (NumberFormatException e1) {
+                            e1.printStackTrace();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                        
+                    } catch (FileNotFoundException e1) {
+                        e1.printStackTrace();
+                    }finally{
+                        try {
+                            reader.close();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                    boardcom[n.i].refreshData();
+                    setContentPane(boardcom[n.i]);
+                    n.i++;
+                } 
+            }
+    }
+*/
 
 }
