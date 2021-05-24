@@ -28,6 +28,10 @@ public class BoardComponent extends JPanel {
     private JLabel mapData=new JLabel();
     private JButton cheat;
     private Number cheatNum = new Number();
+    private Number skillNum1 = new Number();
+    private Number skillNum2 = new Number();
+    private Number skillNum3 = new Number();
+    private Number skillNum4 = new Number();
 
 
     public BoardComponent(){
@@ -130,15 +134,83 @@ public class BoardComponent extends JPanel {
             suMembers[i]=new SUMember(i);
             if(i==1){
                 suMembers[i].setBounds(50,9,160,190);
+                skillNum1.i=0;
+                suMembers[i].getMemberImage().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (skillNum1.i==0){
+                            for (int x = 1; x <= board.row; x++) {
+                                boolean jdg = false;
+                                for (int y = 1; y <= board.row; y++) {
+                                    if (board.getOpenState(x, y) == 1&&board.getMineState(x, y) == 9) {
+                                        Image Flag = new ImageIcon("src\\view\\pictures\\flag.jpg").getImage()
+                                                .getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+                                        ImageIcon flag = new ImageIcon(Flag);
+                                        buttons[x][y].setIcon(flag);
+                                        buttons[x][y].setBorderPainted(false);
+                                        board.gridInfo[x][y]=92;
+                                        board.getPlayers()[1].setScore(board.getPlayers()[1].getScore()+1);
+                                        board.setRemain(board.getRemain()-1);
+                                        refreshData();
+                                        jdg=true;
+                                    }
+                                    if (jdg){
+                                        break;
+                                    }
+                                }
+                                if (jdg){
+                                    skillNum1.i++;
+                                    break;
+                                }
+                            }
+                        }
+
+                    }
+                });
             }
             if(i==2){
                 suMembers[i].setBounds(50,208,160,190);
+                skillNum2.i=0;
+                suMembers[i].getMemberImage().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (skillNum2.i==0){
+                            board.setMove(board.getMove()-2);
+                            refreshData();
+                            skillNum2.i++;
+                        }
+                    }
+                });
             }
             if(i==3){
                 suMembers[i].setBounds(50,407,160,190);
+                skillNum3.i=0;
+                suMembers[i].getMemberImage().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (skillNum3.i==0){
+                            board.getPlayers()[3].setScore(board.getPlayers()[3].getScore()+2);
+                            board.getPlayers()[3].setMiss(board.getPlayers()[3].getMiss()+5);
+                            refreshData();
+                            skillNum3.i++;
+                        }
+                    }
+                });
             }
             if(i==4){
                 suMembers[i].setBounds(50,606,160,190);
+                skillNum4.i=0;
+                suMembers[i].getMemberImage().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (skillNum4.i==0){
+                            board.setPlayerNow(4);
+                            board.setMove(moveNum-1);
+                            refreshData();
+                            skillNum4.i++;
+                        }
+                    }
+                });
             }
             add(suMembers[i]);
         }
