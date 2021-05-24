@@ -306,7 +306,7 @@ public class Board {
             if(maxScore<players[i].getScore())maxScore=players[i].getScore();
         }
         for(int i=1;i<=playerNum;i++){
-            if(maxScore-players[i].getScore()>=remain)over++;
+            if(maxScore-players[i].getScore()>remain)over++;
         }
         if(over==playerNum-1)return true;
         return false;

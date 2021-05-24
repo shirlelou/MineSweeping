@@ -69,6 +69,7 @@ public class GameFrame extends JFrame{
                         BufferedReader br = new BufferedReader(reader);
                         
                         String nextline;
+                        
                         try {
                             nextline = br.readLine();
                             int[] a = new int[40];
@@ -105,6 +106,7 @@ public class GameFrame extends JFrame{
                         } catch (IOException e2) {
                             e2.printStackTrace();
                         }
+
                         try {
                             nextline = br.readLine();
                             int[] a = new int[40];
@@ -128,16 +130,17 @@ public class GameFrame extends JFrame{
 
 
                         try {
-                            nextline = br.readLine();
-                            int[] a = new int[40];
-                            String[] b = new String[40];
-                            b = nextline.split(" ");
-                            for(int i=0;i<b.length;i++){
-                                a[i] = Integer.parseInt(b[i]);
-                            }
-                            int score = a[0];
-                            int miss = a[1];   
                             for(int i=1;i<=boardcom[n.i].board.getPlayerNum()+boardcom[n.i].board.getAiNum();i++){
+                                nextline = br.readLine();
+                                int[] a = new int[40];
+                                String[] b = new String[40];
+                                b = nextline.split(" ");
+                                for(int j=0;j<b.length;j++){
+                                    a[j] = Integer.parseInt(b[j]);
+                                }
+                                int score = a[0];
+                                int miss = a[1];   
+                            
                                 boardcom[n.i].board.getPlayers()[i].setScore(score);
                                 boardcom[n.i].board.getPlayers()[i].setMiss(miss);
                             } 
@@ -145,36 +148,30 @@ public class GameFrame extends JFrame{
                             e2.printStackTrace();
                         }
 
-                        int tmp = 1;
+                        
                         try {
-                            while(br.readLine()!=null){
+                            for(int x=1;x<=boardcom[n.i].board.row;x++){
                                 nextline = br.readLine();
                                 int[] a = new int[40];
                                 String[] b = new String[40];
-                                if(nextline != null){
-                                    b = nextline.split(" ");
-                                    for(int i=0;i<b.length;i++){
-                                        a[i] = Integer.parseInt(b[i]);
-                                    }
-                                    for(int y=1;y<=boardcom[n.i].board.row;y++){
-                                        
-                                            boardcom[n.i].board.gridInfo[tmp][y]=a[y];
-                                        
-                                    }
-                                    tmp++;
-                                    if(tmp>boardcom[n.i].board.row)break;
-                                
+                                b = nextline.split(" ");
+                                for(int i=0;i<b.length;i++){
+                                    if(b[i]==null)break;
+                                    a[i] = Integer.parseInt(b[i]);
                                 }
+                                for(int y=1;y<=boardcom[n.i].board.col;y++){
+                                    boardcom[n.i].board.gridInfo[x][y]=a[y-1];
+                                }
+                                
                             } 
                             
                             
                         } catch (NumberFormatException e1) {
                             e1.printStackTrace();
                         } catch (IOException e1) {
-                            // TODO Auto-generated catch block
                             e1.printStackTrace();
                         }
-                        boardcom[n.i].refreshData();
+                        
                     } catch (FileNotFoundException e1) {
                         e1.printStackTrace();
                     }finally{
@@ -184,6 +181,7 @@ public class GameFrame extends JFrame{
                             e1.printStackTrace();
                         }
                     }
+                    boardcom[n.i].refreshData();
                     setContentPane(boardcom[n.i]);
                     n.i++;
                 } 
@@ -272,11 +270,11 @@ public class GameFrame extends JFrame{
         strans.primary.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                /*boardcom[n.i].setSuMembers(1, 0, 5);
+                boardcom[n.i].setSuMembers(1, 0, 5);
                 boardcom[n.i].setBoard(9 , 9, 10);
                 setContentPane(boardcom[n.i]);     
-                n.i++;*/
-                setContentPane(new BoardComponent(10,10,2,0,10,5));
+                n.i++;
+                
             }
         });
         strans.middle.addActionListener(new ActionListener() {
