@@ -366,9 +366,13 @@ public class GameFrame extends JFrame{
         dItransComponent.comfirm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-                boardcom[n.i].setSuMembers(4, 0, 5);
-                boardcom[n.i].setBoard(16 , 30, 99);
+                int rows = Integer.parseInt(dItransComponent.setRows.getText());
+                int cols = Integer.parseInt(dItransComponent.setCols.getText());
+                int mineNum = Integer.parseInt(dItransComponent.setMineNum.getText());
+                int playerNum = Integer.parseInt(dItransComponent.setPlayerNum.getText());
+                int moveNum = Integer.parseInt(dItransComponent.setMoveNum.getText());
+                boardcom[n.i].setSuMembers(playerNum, 0, moveNum);
+                boardcom[n.i].setBoard(rows , cols, mineNum);
                 setContentPane(boardcom[n.i]);
                 n.i++;
             }
