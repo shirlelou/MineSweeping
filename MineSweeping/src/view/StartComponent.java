@@ -39,22 +39,19 @@ public class StartComponent extends JPanel{
         music = new JButton(musicicon);
 
         setLayout(null);
-        start.setBounds(230,350,350,50);
-        contin.setBounds(230,450,350,50);
-        story.setBounds(230,550,350,50);
-        help.setBounds(230,650,350,50);
-        music.setBounds(758,725,50,50);
+        start.setBounds(320,350,350,50);
+        contin.setBounds(320,450,350,50);
+        story.setBounds(320,550,350,50);
+        help.setBounds(320,650,350,50);
+        music.setBounds(930,725,50,50);
 
         
-        start.setContentAreaFilled(false);
-        contin.setContentAreaFilled(false);
-        help.setContentAreaFilled(false);
-        story.setContentAreaFilled(false);
 
-        start.setForeground(Color.yellow);
-        contin.setForeground(Color.yellow);
-        help.setForeground(Color.yellow);
-        story.setForeground(Color.yellow);
+
+        start.setForeground(Color.blue);
+        contin.setForeground(Color.blue);
+        help.setForeground(Color.blue);
+        story.setForeground(Color.blue);
 
 
         music.setBorderPainted(false);

@@ -37,7 +37,7 @@ public class TransComponent extends JPanel{
         Image icon = new ImageIcon("src\\view\\pictures\\musicicon.gif").getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT);
         ImageIcon musicicon = new ImageIcon(icon);
         music = new JButton(musicicon);
-        music.setBounds(758,725,50,50);
+        music.setBounds(930,725,50,50);
         music.setBorderPainted(false);
         add(music);
 
@@ -59,10 +59,10 @@ public class TransComponent extends JPanel{
 
         setLayout(null);
         
-        one.setBounds(230,350,350,50);
-        two.setBounds(230,450,350,50);
-        many.setBounds(230,550,350,50);
-        diy.setBounds(230,650,350,50);
+        one.setBounds(320,350,350,50);
+        two.setBounds(320,450,350,50);
+        many.setBounds(320,550,350,50);
+        diy.setBounds(320,650,350,50);
         
 
 
