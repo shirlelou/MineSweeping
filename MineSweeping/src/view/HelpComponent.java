@@ -24,7 +24,7 @@ public class HelpComponent extends JPanel{
         Image icon = new ImageIcon("src\\view\\pictures\\musicicon.gif").getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT);
         ImageIcon musicicon = new ImageIcon(icon);
         music = new JButton(musicicon);
-        music.setBounds(758,725,50,50);
+        music.setBounds(930,725,50,50);
         music.setBorderPainted(false);
         add(music);
 

@@ -40,7 +40,7 @@ public class DItransComponent extends JPanel{
         add(rets);
 
         setLayout(null);
-        music.setBounds(758,725,50,50);
+        music.setBounds(930,725,50,50);
 
 
         music.setBorderPainted(false);
