@@ -14,11 +14,12 @@ public class DItransComponent extends JPanel{
     JTextField setCols;
     JTextField setMineNum;
     JTextField setPlayerNum;
+    JTextField setMoveNum;
 
     @Override
 
         public void paintComponent(Graphics g) {
-            ImageIcon background=new ImageIcon("");
+            ImageIcon background=new ImageIcon("src\\view\\pictures\\background02.jpg");
 
             g.drawImage(background.getImage(), 0, 0, getWidth(), getHeight(), null);
 
@@ -51,40 +52,53 @@ public class DItransComponent extends JPanel{
         setCols = new JTextField();
         setMineNum = new JTextField();
         setPlayerNum = new JTextField();
+        setMoveNum = new JTextField();
         comfirm = new JButton("确定");
         JLabel Rows = new JLabel("输入行数");
         JLabel Cols = new JLabel("输入列数");
         JLabel MineNum = new JLabel("输入地雷数");
         JLabel PlayerNum = new JLabel("输入玩家数");
-         
+        JLabel SetMoveNum = new JLabel("输入行动数");
 
-        Font font = new Font("黑体",Font.BOLD,10);
+        Font font = new Font("黑体",Font.BOLD,20);
         Rows.setFont(font);
         Cols.setFont(font);
         MineNum.setFont(font);
         PlayerNum.setFont(font);
-        Rows.setBounds(425,380,40,10);
-        Cols.setBounds(455,380,40,10);
-        MineNum.setBounds(510,380,50,10);
-        PlayerNum.setBounds(540,380,50,10);
-        comfirm.setBounds(540,500,50,10);
+        SetMoveNum.setFont(font);
+
+        Rows.setBounds(250,370,110,30);
+        Cols.setBounds(370,370,110,30);
+        MineNum.setBounds(490,370,110,30);
+        PlayerNum.setBounds(610,370,110,30);
+        SetMoveNum.setBounds(730,370,110,30);
+
         add(Rows);
         add(Cols);
         add(MineNum);
         add(PlayerNum);
-        add(comfirm);
+        add(SetMoveNum);
+
 
         setRows.setFont(font);
         setCols.setFont(font);
         setMineNum.setFont(font);
         setPlayerNum.setFont(font);
-        setRows.setBounds(430,400,30,10);
-        setCols.setBounds(460,400,30,10);
-        setMineNum.setBounds(515,400,40,10);
-        setPlayerNum.setBounds(550,400,30,10);
+        setMoveNum.setFont(font);
+        comfirm.setFont(font);
+
+        setRows.setBounds(250,400,110,30);
+        setCols.setBounds(370,400,110,30);
+        setMineNum.setBounds(490,400,110,30);
+        setPlayerNum.setBounds(610,400,110,30);
+        setMoveNum.setBounds(730,400,110,30);
+        comfirm.setBounds(640,500,100,30);
+
         add(setRows);
         add(setCols);
         add(setMineNum);
         add(setPlayerNum);
+        add(setMoveNum);
+        add(comfirm);
     }
 }
