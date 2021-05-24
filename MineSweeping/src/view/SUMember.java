@@ -21,12 +21,8 @@ public class SUMember extends JPanel{
 
     }
 
-    public void setMiss(int miss) {
-        this.miss = miss;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
+    public JButton getMemberImage() {
+        return memberImage;
     }
 
     public void accessMemberImage(){
