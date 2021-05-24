@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 
 public class BoardComponent extends JPanel {
@@ -178,6 +179,56 @@ public class BoardComponent extends JPanel {
         }
     }
 
+    public void refreshData(){
+        int now = board.getPlayerNow();
+        String MapData = "当前玩家:"+suMembers[now].getName(now)+
+                " 剩余雷数:"+board.getRemain()+
+                " 剩余行动数:"+ (moveNum-board.getMove());
+        mapData.setText(MapData);
+
+        Image PictureD1 = new ImageIcon("src\\view\\individuation\\member01Dark.jpg").getImage().getScaledInstance(160, 160, Image.SCALE_DEFAULT);
+        ImageIcon pictureD1 = new ImageIcon(PictureD1);
+        Image PictureD2 = new ImageIcon("src\\view\\individuation\\member02Dark.jpg").getImage().getScaledInstance(160, 160, Image.SCALE_DEFAULT);
+        ImageIcon pictureD2 = new ImageIcon(PictureD2);
+        Image PictureD3 = new ImageIcon("src\\view\\individuation\\member03Dark.jpg").getImage().getScaledInstance(160, 160, Image.SCALE_DEFAULT);
+        ImageIcon pictureD3 = new ImageIcon(PictureD3);
+        Image PictureD4 = new ImageIcon("src\\view\\individuation\\member04Dark.jpg").getImage().getScaledInstance(160, 160, Image.SCALE_DEFAULT);
+        ImageIcon pictureD4 = new ImageIcon(PictureD4);
+        Image Picture1 = new ImageIcon("src\\view\\individuation\\member01.jpg").getImage().getScaledInstance(160, 160, Image.SCALE_DEFAULT);
+        ImageIcon picture1 = new ImageIcon(Picture1);
+        Image Picture2 = new ImageIcon("src\\view\\individuation\\member02.jpg").getImage().getScaledInstance(160, 160, Image.SCALE_DEFAULT);
+        ImageIcon picture2 = new ImageIcon(Picture2);
+        Image Picture3 = new ImageIcon("src\\view\\individuation\\member03.jpg").getImage().getScaledInstance(160, 160, Image.SCALE_DEFAULT);
+        ImageIcon picture3 = new ImageIcon(Picture3);
+        Image Picture4 = new ImageIcon("src\\view\\individuation\\member04.jpg").getImage().getScaledInstance(160, 160, Image.SCALE_DEFAULT);
+        ImageIcon picture4 = new ImageIcon(Picture4);
+        for (int i = 1; i <= playerNum+AINum; i++) {
+            if (i==1){
+                suMembers[i].setMemberImage(pictureD1);
+                if (i==now){
+                    suMembers[i].setMemberImage(picture1);
+                }
+            }else if (i==2){
+                suMembers[i].setMemberImage(pictureD2);
+                if (i==now){
+                    suMembers[i].setMemberImage(picture2);
+                }
+            }else if (i==3){
+                suMembers[i].setMemberImage(pictureD3);
+                if (i==now){
+                    suMembers[i].setMemberImage(picture3);
+                }
+            }else if (i==4){
+                suMembers[i].setMemberImage(pictureD4);
+                if (i==now){
+                    suMembers[i].setMemberImage(picture4);
+                }
+            }
+            String memberData = suMembers[i].getName(i)+" 得分:"+board.getPlayers()[i].getScore()+"失误:"+board.getPlayers()[i].getMiss();
+            suMembers[i].scoreBoard.setText(memberData);
+        }
+    }
+
 
 
 
@@ -273,15 +324,22 @@ public class BoardComponent extends JPanel {
                             String memberData = suMembers[used].getName(used)+" 得分:"+board.getPlayers()[used].getScore()+"失误:"+board.getPlayers()[used].getMiss();
                             suMembers[used].scoreBoard.setText(memberData);
                             if(board.isend){
-                                int max=0;
-                                for(int i=1;i<=playerNum+AINum;i++){
-                                    if(board.getPlayers()[i].getScore()>board.getPlayers()[max].getScore()){
-                                        max=i;
-                                    }
-                                    else if(board.getPlayers()[i].getScore()==board.getPlayers()[max].getScore()){
-                                        if(board.getPlayers()[i].getMiss()==board.getPlayers()[max].getMiss());
+                                int max = board.getPlayers()[1].getScore();
+                                int[] maxIndex=new int[5];
+                                int[] win = new int[5];
+                                ArrayList winList = new ArrayList();
+                                for(int i=1;i<=playerNum+AINum-1;i++){
+                                    if(board.getPlayers()[i+1].getScore()>=board.getPlayers()[i].getScore()){
+                                        max=board.getPlayers()[i+1].getScore();
+                                        maxIndex[i+1]=1;
                                     }
                                 }
+                                for (int k = 1; k <= playerNum+AINum; k++) {
+                                    if (maxIndex[k]==1){
+                                        win[k]=2;
+                                    }
+                                }
+
                                 JOptionPane.showMessageDialog(gameBoard, "", "游戏结束", JOptionPane.INFORMATION_MESSAGE, null);
                             }
                         }
