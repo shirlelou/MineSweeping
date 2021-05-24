@@ -8,6 +8,12 @@ public class DItransComponent extends JPanel{
         
     public JButton music;
     public JButton rets;
+    public JButton comfirm;
+
+    JTextField setRows;
+    JTextField setCols;
+    JTextField setMineNum;
+    JTextField setPlayerNum;
 
     @Override
 
@@ -41,14 +47,16 @@ public class DItransComponent extends JPanel{
        
         add(music);
 
-        JTextField setRows = new JTextField();
-        JTextField setCols = new JTextField();
-        JTextField setMineNum = new JTextField();
-        JTextField setPlayerNum = new JTextField();
+        setRows = new JTextField();
+        setCols = new JTextField();
+        setMineNum = new JTextField();
+        setPlayerNum = new JTextField();
+        comfirm = new JButton("确定");
         JLabel Rows = new JLabel("输入行数");
         JLabel Cols = new JLabel("输入列数");
         JLabel MineNum = new JLabel("输入地雷数");
         JLabel PlayerNum = new JLabel("输入玩家数");
+         
 
         Font font = new Font("黑体",Font.BOLD,10);
         Rows.setFont(font);
@@ -59,10 +67,12 @@ public class DItransComponent extends JPanel{
         Cols.setBounds(455,380,40,10);
         MineNum.setBounds(510,380,50,10);
         PlayerNum.setBounds(540,380,50,10);
+        comfirm.setBounds(540,500,50,10);
         add(Rows);
         add(Cols);
         add(MineNum);
         add(PlayerNum);
+        add(comfirm);
 
         setRows.setFont(font);
         setCols.setFont(font);

@@ -7,6 +7,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 public class Board {
     public int row;
     public int col;
@@ -364,7 +367,37 @@ public class Board {
 
         FileWriter out = null;
         try {
-            out = new FileWriter("out\\out.txt");
+
+
+            File fi;
+            String saveFileName = "src/xyz/saving/output.txt";
+            JFileChooser fileChooser = new JFileChooser();
+
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "游戏存档文件(*.txt)", "txt");
+            fileChooser.setFileFilter(filter);
+            fileChooser.setSelectedFile(new File(saveFileName)); 
+
+            
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+       
+             fileChooser.setMultiSelectionEnabled(true);
+            fileChooser.setDialogTitle("保存游戏进度文件");
+            int value = fileChooser.showSaveDialog(null);
+            if (value == fileChooser.APPROVE_OPTION) {
+            
+            File filex[] = fileChooser.getSelectedFiles();
+            for (int i = 0; i < filex.length; i++) {
+                System.out.println(filex[i].getAbsolutePath());
+                fi = fileChooser.getSelectedFile();
+                saveFileName = fi.getAbsolutePath() + ".txt";
+                System.out.println("save: " + saveFileName);
+            }
+        }
+
+
+            File file=new File(saveFileName);
+            out = new FileWriter(file);
             out.write(playerNum+" "+aiNum+" "+moveNum+"\n");
             out.write(row+" "+col+" "+mineNum+"\n");
             out.write(playerNow+" "+move+" "+remain+"\n");
@@ -379,6 +412,8 @@ public class Board {
                 }
                 out.write("\n");
             }
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }finally{
